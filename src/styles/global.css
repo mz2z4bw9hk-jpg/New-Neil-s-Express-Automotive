@@ -1,0 +1,141 @@
+@import '@fontsource/anton';
+@import '@fontsource-variable/inter';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-night-900 text-ink font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: rgba(255, 197, 61, 0.9);
+    color: #1a1400;
+  }
+
+  :focus-visible {
+    outline: 2px solid #ffc53d;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Display face: Anton carries Latin; CJK falls back to bold system sans. */
+  .font-display {
+    letter-spacing: 0.01em;
+    font-weight: 400;
+  }
+
+  :lang(zh) .font-display {
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+
+  input[type='date']::-webkit-calendar-picker-indicator {
+    filter: invert(0.85);
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-semibold transition
+      duration-200 select-none whitespace-nowrap;
+  }
+
+  .btn-accent {
+    @apply btn bg-accent text-accent-ink hover:bg-accent-bright active:scale-[0.98]
+      shadow-[0_10px_30px_-10px_rgba(255,197,61,0.55)] hover:shadow-glow;
+  }
+
+  .btn-ghost {
+    @apply btn border border-line bg-white/[0.03] text-ink hover:border-dim/40 hover:bg-white/[0.07]
+      active:scale-[0.98];
+  }
+
+  .btn-lg {
+    @apply px-7 py-3.5 text-base;
+  }
+
+  .btn-md {
+    @apply px-5 py-2.5 text-sm;
+  }
+
+  .btn-sm {
+    @apply px-4 py-2 text-xs;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-night-800/80 shadow-card;
+  }
+
+  .glass {
+    @apply border border-line bg-night-900/70 backdrop-blur-xl;
+  }
+
+  .kicker {
+    @apply text-[0.7rem] font-bold uppercase tracking-[0.22em] text-accent;
+  }
+
+  .display-xl {
+    @apply font-display uppercase leading-[0.95] tracking-tight;
+    font-size: clamp(2.75rem, 8.5vw, 6.5rem);
+  }
+
+  .display-lg {
+    @apply font-display uppercase leading-[1.02];
+    font-size: clamp(2rem, 5.2vw, 3.9rem);
+  }
+
+  .display-md {
+    @apply font-display uppercase leading-[1.05];
+    font-size: clamp(1.5rem, 3.4vw, 2.4rem);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .scrollbar-slim {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(154, 167, 186, 0.35) transparent;
+  }
+
+  .scrollbar-slim::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-slim::-webkit-scrollbar-thumb {
+    background: rgba(154, 167, 186, 0.35);
+    border-radius: 999px;
+  }
+}
+
+/* Motion hygiene: kill decorative movement for users who ask for less. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
