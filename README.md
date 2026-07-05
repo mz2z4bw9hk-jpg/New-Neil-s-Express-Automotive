@@ -40,11 +40,15 @@ npm run preview    # serve the production build
 
 The build is fully static.
 
+- **GitHub Pages (included)**: `.github/workflows/deploy.yml` builds and publishes on every push
+  to the default branch. Requirement: GitHub Pages must be available for the repo — public repos
+  on any plan, private repos need GitHub Pro/Team. If the first run's "configure-pages" step
+  fails, either make the repo public or enable Pages once under
+  **Settings → Pages → Source: GitHub Actions**, then re-run the workflow.
 - **Netlify / Vercel / Cloudflare Pages**: point at the repo, build command `npm run build`,
   output `dist`. SPA fallback for Netlify is already included (`public/_redirects`).
-- **GitHub Pages** (project page under a sub-path):
-  `npm run build -- --base=/<repo-name>/` then publish `dist/`. The postbuild step copies
-  `index.html` to `404.html` so deep links work.
+- **Manual sub-path build**: `npm run build -- --base=/<repo-name>/` then publish `dist/`.
+  The postbuild step copies `index.html` to `404.html` so deep links work.
 
 ## Where things live
 
