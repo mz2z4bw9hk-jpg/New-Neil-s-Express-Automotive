@@ -109,6 +109,42 @@
     text-wrap: balance;
   }
 
+  /* One-pass light sweep across a button on hover. */
+  .btn-sheen {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-sheen::after {
+    content: '';
+    position: absolute;
+    top: -20%;
+    bottom: -20%;
+    left: -45%;
+    width: 32%;
+    background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+    transform: skewX(-18deg);
+    transition: left 0.65s ease;
+    pointer-events: none;
+  }
+
+  .btn-sheen:hover::after {
+    left: 135%;
+  }
+
+  /* Little phone-ring wiggle, triggered by a hovered .group parent. */
+  @keyframes ring-wiggle {
+    0%, 100% { transform: rotate(0); }
+    20% { transform: rotate(-14deg); }
+    45% { transform: rotate(11deg); }
+    70% { transform: rotate(-7deg); }
+  }
+
+  .group:hover .icon-ring {
+    animation: ring-wiggle 0.55s ease;
+    transform-origin: 60% 40%;
+  }
+
   .scrollbar-slim {
     scrollbar-width: thin;
     scrollbar-color: rgba(154, 167, 186, 0.35) transparent;

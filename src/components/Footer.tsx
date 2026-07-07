@@ -15,8 +15,8 @@ export function Footer() {
     { id: 'oil', label: d.services.oil.title },
     { id: 'brakes', label: d.services.brakes.title },
     { id: 'diagnostics', label: d.services.diagnostics.title },
-    { id: 'ac', label: d.services.ac.title },
-    { id: 'hybrid', label: d.services.hybrid.title },
+    { id: 'exhaust', label: d.services.exhaust.title },
+    { id: 'euro', label: d.services.euro.title },
   ];
 
   return (
@@ -28,7 +28,7 @@ export function Footer() {
           </Link>
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-dim">{d.footer.blurb}</p>
           <div className="mt-6 flex flex-wrap gap-2">
-            {['AAA', 'RepairPal', '4.9★'].map((b) => (
+            {['4.9★', 'Porsche · Mercedes', 'EN · ES · 中文'].map((b) => (
               <span
                 key={b}
                 className="rounded-full border border-line bg-white/[0.03] px-3 py-1 text-xs font-semibold text-dim"
@@ -101,9 +101,11 @@ export function Footer() {
             <li className="flex gap-2.5">
               <Icon name="clock" size={16} className="mt-0.5 shrink-0 text-accent" />
               <span>
-                {d.visitBand.weekdays}: {d.visitBand.hoursValue}
-                <br />
-                {d.visitBand.sunday}: {d.common.closed}
+                {d.visitBand.hoursLines.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
               </span>
             </li>
           </ul>

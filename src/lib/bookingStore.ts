@@ -57,9 +57,9 @@ export interface ShopMessage {
   read: boolean;
 }
 
-const BOOKINGS_KEY = 'nea.bookings.v1';
-const MESSAGES_KEY = 'nea.messages.v1';
-const SEED_FLAG = 'nea.seeded.v1';
+const BOOKINGS_KEY = 'car.bookings.v2';
+const MESSAGES_KEY = 'car.messages.v2';
+const SEED_FLAG = 'car.seeded.v2';
 
 function read<T>(key: string): T[] {
   try {
@@ -72,7 +72,7 @@ function read<T>(key: string): T[] {
 
 function write<T>(key: string, rows: T[]): void {
   localStorage.setItem(key, JSON.stringify(rows));
-  window.dispatchEvent(new CustomEvent('nea:data'));
+  window.dispatchEvent(new CustomEvent('car:data'));
 }
 
 export function listBookings(): Booking[] {
@@ -119,6 +119,18 @@ export function updateBooking(id: string, patch: Partial<Booking>): void {
     b.id === id ? { ...b, ...patch, updatedAt: new Date().toISOString() } : b,
   );
   write(BOOKINGS_KEY, rows);
+}
+
+/** All other visits by the same phone number or plate — powers the admin history panel. */
+export function customerHistory(booking: Booking): Booking[] {
+  const phone = booking.phone.replace(/\D/g, '');
+  const plate = booking.plate.trim().toUpperCase();
+  return listBookings().filter(
+    (b) =>
+      b.id !== booking.id &&
+      ((phone && b.phone.replace(/\D/g, '') === phone) ||
+        (plate && b.plate.trim().toUpperCase() === plate)),
+  );
 }
 
 /** Returning-customer lookup for the wizard's plate autocomplete. */
@@ -205,23 +217,23 @@ function seedOnce(): void {
   const ymd = (offset: number) => day(offset).replaceAll('-', '');
   const rows: Booking[] = [
     mk({
-      ref: `NEA-${ymd(-1)}-001`,
+      ref: `CAR-${ymd(-1)}-001`,
       status: 'completed',
       serviceId: 'oil',
       optionId: 'valuePackage',
-      firstName: 'Grace',
-      lastName: 'Liu',
+      firstName: 'Gloria',
+      lastName: 'Herrera',
       date: day(-1),
       slot: 9,
       durationMin: 45,
       vehicleYear: '2021',
-      vehicleMake: 'Lexus',
-      vehicleModel: 'RX 350',
+      vehicleMake: 'Toyota',
+      vehicleModel: 'Corolla',
       plate: '8KXR442',
       transport: 'wait',
     }),
     mk({
-      ref: `NEA-${ymd(0)}-001`,
+      ref: `CAR-${ymd(0)}-001`,
       status: 'inService',
       serviceId: 'brakes',
       optionId: 'padsRotors',
@@ -234,11 +246,11 @@ function seedOnce(): void {
       vehicleMake: 'Ford',
       vehicleModel: 'F-150',
       plate: '7TRK019',
-      transport: 'shuttle',
+      transport: 'dropoff',
       notes: 'Squeal from front right when braking downhill.',
     }),
     mk({
-      ref: `NEA-${ymd(0)}-002`,
+      ref: `CAR-${ymd(0)}-002`,
       status: 'confirmed',
       serviceId: 'ac',
       optionId: 'recharge',
@@ -253,26 +265,26 @@ function seedOnce(): void {
       plate: '8PLM330',
     }),
     mk({
-      ref: `NEA-${ymd(1)}-001`,
+      ref: `CAR-${ymd(1)}-001`,
       status: 'pending',
-      serviceId: 'hybrid',
-      optionId: 'healthCheck',
-      firstName: 'Daniel',
-      lastName: 'Nguyen',
+      serviceId: 'euro',
+      optionId: 'euroDiagnostics',
+      firstName: 'Kevin',
+      lastName: 'Lam',
       date: day(1),
       slot: 10,
       durationMin: 90,
-      vehicleYear: '2018',
-      vehicleMake: 'Toyota',
-      vehicleModel: 'Prius',
-      plate: '6HYB884',
-      notes: 'Hybrid warning light came on twice last week.',
+      vehicleYear: '2019',
+      vehicleMake: 'Mercedes-Benz',
+      vehicleModel: 'C300',
+      plate: '6EUR884',
+      notes: 'Check engine light, slight hesitation on cold starts.',
     }),
     mk({
-      ref: `NEA-${ymd(2)}-001`,
+      ref: `CAR-${ymd(2)}-001`,
       status: 'pending',
-      serviceId: 'smog',
-      optionId: 'failedRepair',
+      serviceId: 'exhaust',
+      optionId: 'catConverter',
       firstName: 'Rosa',
       lastName: 'Martinez',
       date: day(2),

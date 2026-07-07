@@ -15,30 +15,27 @@ export interface ServiceDef {
 export type ServiceId =
   | 'oil'
   | 'brakes'
-  | 'tires'
   | 'diagnostics'
+  | 'exhaust'
   | 'ac'
   | 'battery'
-  | 'scheduled'
-  | 'hybrid'
-  | 'suspension'
-  | 'smog'
-  | 'transmission'
-  | 'fleet';
+  | 'euro'
+  | 'rebuild'
+  | 'scheduled';
 
+/** Castro's real catalog per public listings: oil, brakes, engine work &
+ *  rebuilds, exhaust & catalytic converters, batteries, A/C, and
+ *  Porsche / Mercedes-Benz specialty service. */
 export const SERVICES: ServiceDef[] = [
   { id: 'oil', icon: 'oil', group: 'maintenance', duration: 45, options: ['conventional', 'fullSynthetic', 'valuePackage'] },
   { id: 'brakes', icon: 'brakes', group: 'tiresBrakes', duration: 90, options: ['inspection', 'padsRotors', 'fluidFlush'] },
-  { id: 'tires', icon: 'tire', group: 'tiresBrakes', duration: 60, options: ['rotationBalance', 'newTires', 'alignment'] },
-  { id: 'diagnostics', icon: 'scan', group: 'repair', duration: 60, options: ['checkEngine', 'prePurchase', 'electrical'] },
+  { id: 'diagnostics', icon: 'scan', group: 'repair', duration: 60, options: ['checkEngine', 'prePurchase', 'drivability'] },
+  { id: 'exhaust', icon: 'muffler', group: 'repair', duration: 90, options: ['inspection', 'catConverter', 'mufflerPipes'] },
   { id: 'ac', icon: 'snow', group: 'climate', duration: 90, options: ['performanceCheck', 'recharge', 'heaterRepair'] },
   { id: 'battery', icon: 'bolt', group: 'climate', duration: 45, options: ['testReplace', 'starterAlternator', 'wiring'] },
+  { id: 'euro', icon: 'sparkle', group: 'hybrid', duration: 90, options: ['euroService', 'euroDiagnostics', 'euroBrakes'] },
+  { id: 'rebuild', icon: 'gears', group: 'repair', duration: 120, options: ['evaluation', 'topEnd', 'fullRebuild'] },
   { id: 'scheduled', icon: 'calendarCheck', group: 'maintenance', duration: 120, options: ['minor30k', 'major60k', 'factory'] },
-  { id: 'hybrid', icon: 'leaf', group: 'hybrid', duration: 90, options: ['healthCheck', 'hvBattery', 'hybridService'] },
-  { id: 'suspension', icon: 'spring', group: 'repair', duration: 90, options: ['rideCheck', 'shocksStruts', 'steering'] },
-  { id: 'smog', icon: 'gauge', group: 'repair', duration: 60, options: ['prep', 'failedRepair', 'readiness'] },
-  { id: 'transmission', icon: 'gears', group: 'repair', duration: 90, options: ['fluidService', 'diagnosis', 'clutch'] },
-  { id: 'fleet', icon: 'truck', group: 'fleet', duration: 120, options: ['truckRepair', 'fleetMaintenance', 'dot'] },
 ];
 
 export const SERVICE_MAP: Record<ServiceId, ServiceDef> = Object.fromEntries(
@@ -54,8 +51,8 @@ export const SERVICE_GROUPS: ServiceGroup[] = [
   'fleet',
 ];
 
-/** Booking time-slot starts, in fractional hours (8:00 AM … 5:30 PM). */
-export const SLOT_HOURS: number[] = Array.from({ length: 20 }, (_, i) => 8 + i * 0.5);
+/** Booking time-slot starts, in fractional hours (8:00 AM … 6:30 PM at the latest). */
+export const SLOT_HOURS: number[] = Array.from({ length: 22 }, (_, i) => 8 + i * 0.5);
 
 export const VEHICLE_YEARS: number[] = Array.from(
   { length: new Date().getFullYear() + 2 - 1980 },
@@ -65,5 +62,5 @@ export const VEHICLE_YEARS: number[] = Array.from(
 export const VEHICLE_MAKES: string[] = [
   'Acura', 'Audi', 'BMW', 'Buick', 'Cadillac', 'Chevrolet', 'Chrysler', 'Dodge', 'Ford', 'GMC',
   'Honda', 'Hyundai', 'Infiniti', 'Jeep', 'Kia', 'Lexus', 'Lincoln', 'Mazda', 'Mercedes-Benz',
-  'Mini', 'Mitsubishi', 'Nissan', 'Ram', 'Subaru', 'Tesla', 'Toyota', 'Volkswagen', 'Volvo',
+  'Mini', 'Mitsubishi', 'Nissan', 'Porsche', 'Ram', 'Subaru', 'Tesla', 'Toyota', 'Volkswagen', 'Volvo',
 ];

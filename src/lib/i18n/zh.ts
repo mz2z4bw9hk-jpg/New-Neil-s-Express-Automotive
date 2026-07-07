@@ -2,9 +2,9 @@ import type { Dict } from './en';
 
 export const zh: Dict = {
   meta: {
-    title: "Neil's Express Automotive — 加州阿罕布拉汽车维修",
+    title: 'Castro Auto Repair Service — 加州艾尔蒙特汽车维修',
     description:
-      '阿罕布拉家族经营汽车与卡车维修厂，50 多年历史，AAA 认证，位于 Garfield 大道。几分钟即可在线预约。',
+      '艾尔蒙特 Garvey 大道上老板亲自坐镇的汽车修理厂。换油、刹车、排气与三元催化、空调、发动机大修，保时捷与奔驰专修。几分钟即可在线预约。',
   },
 
   nav: {
@@ -41,26 +41,26 @@ export const zh: Dict = {
   },
 
   hero: {
-    badge: 'AAA 认证 · 家族经营 50 余年',
+    badge: '老板亲自经营 · 4.9★ 好评 · 艾尔蒙特',
     titleA: '安心上路，',
-    titleB: '阿罕布拉。',
+    titleB: '艾尔蒙特。',
     tagline:
-      'Garfield 大道上诚信专业的汽车养护 — 同一个家族，守护圣盖博谷车主安心出行五十余年。',
+      'Garvey 大道上诚信专业的汽车维修 — Juan Castro 和他的团队修得快、修得好，价格当面说清楚。',
     ctaPrimary: '预约您的服务',
     ctaSecondary: '浏览服务项目',
-    statYears: '扎根阿罕布拉',
     statRating: '真实验证评分',
+    statReviews: '顾客评价',
     statDays: '每周营业天数',
     scroll: '下滑',
   },
 
   marquee: [
-    'AAA 认证维修厂',
-    'RepairPal 认证',
-    '4.9★ 真实好评',
-    '大师级技师坐镇',
-    '混合动力检测与维修',
-    '免费接送服务',
+    '4.9★ · 460+ 条真实评价',
+    '老板亲自经营',
+    '保时捷与奔驰专修',
+    '发动机大修',
+    '排气与三元催化',
+    '价格公道 · 交车快',
     'Se Habla Español',
     '我们说中文',
   ],
@@ -68,36 +68,36 @@ export const zh: Dict = {
   servicesSection: {
     kicker: '服务范围',
     title: '每个系统，一站搞定。',
-    intro: '从快捷换油到全面发动机诊断 — 轿车、SUV、混动车和卡车，一次修好。',
+    intro: '从快捷换油到发动机大修 — 家用车、工作皮卡和欧洲车，一次修好。',
     estimated: '约 {duration}',
   },
 
   services: {
     oil: {
-      title: '机油与油液保养',
-      desc: '快捷干净的换油服务，每次到店附赠多点检查。',
+      title: '换油保养',
+      desc: '快捷干净的换油服务，每次到店顺带整车检查。',
       options: {
         conventional: {
           label: '常规机油保养',
-          desc: '优质常规机油和机滤，补充各类油液，多点检查。',
+          desc: '优质常规机油和机滤，补充各类油液，快速检查。',
         },
         fullSynthetic: {
           label: '全合成机油保养',
           desc: '高级全合成机油和机滤，适合现代发动机与更长保养周期。',
         },
         valuePackage: {
-          label: '保养套餐（超值之选）',
-          desc: '全合成换油，外加轮胎换位、电瓶检测和路试。',
+          label: '换油 + 体检套餐（超值之选）',
+          desc: '全合成换油，外加电瓶检测、刹车检查和路试。',
         },
       },
     },
     brakes: {
-      title: '刹车维修与保养',
+      title: '刹车服务',
       desc: '刹车片、刹车盘、卡钳和刹车油 — 制动安心，不靠猜。',
       options: {
         inspection: {
           label: '刹车检查',
-          desc: '全面测量刹车片、刹车盘和管路，并出具书面报告。',
+          desc: '全面测量刹车片、刹车盘和管路，给您一个直接的答案。',
         },
         padsRotors: {
           label: '刹车片与刹车盘更换',
@@ -109,27 +109,9 @@ export const zh: Dict = {
         },
       },
     },
-    tires: {
-      title: '轮胎与四轮定位',
-      desc: '轮胎换位、动平衡、新胎安装与精准四轮定位。',
-      options: {
-        rotationBalance: {
-          label: '换位与动平衡',
-          desc: '均衡磨损，让高速行驶更平顺。',
-        },
-        newTires: {
-          label: '更换新轮胎',
-          desc: '按您的驾驶习惯推荐优质品牌 — 安装并做好平衡。',
-        },
-        alignment: {
-          label: '四轮定位',
-          desc: '电脑四轮定位，解决跑偏和偏磨。',
-        },
-      },
-    },
     diagnostics: {
-      title: '发动机诊断',
-      desc: '用原厂级诊断设备解读发动机故障灯。',
+      title: '发动机诊断与维修',
+      desc: '发动机故障灯追查到真正的病根 — 然后修好它。',
       options: {
         checkEngine: {
           label: '发动机故障灯',
@@ -139,15 +121,33 @@ export const zh: Dict = {
           label: '购车前检测',
           desc: '签字之前，先弄清楚您买的是什么车。',
         },
-        electrical: {
+        drivability: {
           label: '行驶异常排查',
           desc: '熄火、顿挫、怠速不稳 — 我们一查到底。',
         },
       },
     },
+    exhaust: {
+      title: '排气与三元催化',
+      desc: '消音器、排气管和三元催化 — 安静、合规、无泄漏。',
+      options: {
+        inspection: {
+          label: '排气系统检查',
+          desc: '举升机上从头到尾检查泄漏、异响和锈蚀。',
+        },
+        catConverter: {
+          label: '三元催化转换器',
+          desc: '诊断并更换合规的优质催化器。',
+        },
+        mufflerPipes: {
+          label: '消音器与排气管',
+          desc: '消音器和管路的维修或更换，焊接工整。',
+        },
+      },
+    },
     ac: {
-      title: '空调与暖风',
-      desc: '夏天够凉，冬天够暖 — 空调系统专业处理。',
+      title: '空调维修',
+      desc: '艾尔蒙特的夏天需要冷气 — 空调专业诊断，一次做好。',
       options: {
         performanceCheck: {
           label: '空调性能检测',
@@ -169,7 +169,7 @@ export const zh: Dict = {
       options: {
         testReplace: {
           label: '电瓶检测 / 更换',
-          desc: '负载测试并打印报告；需要时安装优质电瓶。',
+          desc: '当场负载测试；需要时安装优质电瓶。',
         },
         starterAlternator: {
           label: '起动机 / 发电机',
@@ -181,13 +181,49 @@ export const zh: Dict = {
         },
       },
     },
+    euro: {
+      title: '欧洲车专修',
+      desc: '保时捷和奔驰的专业保养维修，不用付 4S 店的价格。',
+      options: {
+        euroService: {
+          label: '保时捷 / 奔驰保养',
+          desc: '严格按手册执行德系车的定期保养。',
+        },
+        euroDiagnostics: {
+          label: '欧洲车诊断',
+          desc: '原厂级电脑诊断，维修方案实实在在。',
+        },
+        euroBrakes: {
+          label: '欧洲车刹车与悬挂',
+          desc: '原厂品质配件，按扭矩规范施工。',
+        },
+      },
+    },
+    rebuild: {
+      title: '发动机大修',
+      desc: '从磨损到焕然一新 — 本店自己动手大修，价格公道。',
+      options: {
+        evaluation: {
+          label: '发动机评估',
+          desc: '压缩测试、泄漏测试和检查，先诊断清楚再谈大事。',
+        },
+        topEnd: {
+          label: '缸盖部分维修',
+          desc: '缸垫、气门和正时部件。',
+        },
+        fullRebuild: {
+          label: '整机大修',
+          desc: '完整拆解重建，书面报价清清楚楚。',
+        },
+      },
+    },
     scheduled: {
-      title: '原厂定期保养',
-      desc: '3 万/6 万/9 万英里保养，保住原厂质保 — 没有 4S 店的价格。',
+      title: '定期保养',
+      desc: '3 万/6 万/9 万英里保养，护住质保，也护住您的车。',
       options: {
         minor30k: {
           label: '小保养（3 万英里级）',
-          desc: '换油、轮胎换位、滤芯更换和全车检查。',
+          desc: '换油、滤芯更换和全车检查。',
         },
         major60k: {
           label: '大保养（6 万/9 万英里级）',
@@ -199,102 +235,12 @@ export const zh: Dict = {
         },
       },
     },
-    hybrid: {
-      title: '混合动力与电动车',
-      desc: '混动系统诊断、高压电池和日常养护。',
-      options: {
-        healthCheck: {
-          label: '混动系统健康检查',
-          desc: '检查高压电池状态、散热系统和逆变器。',
-        },
-        hvBattery: {
-          label: '高压电池问题',
-          desc: '警告灯亮或续航下降 — 精确到电池模块级检测。',
-        },
-        hybridService: {
-          label: '混动车定期保养',
-          desc: '针对混动传动系统和刹车特点的专属保养。',
-        },
-      },
-    },
-    suspension: {
-      title: '悬挂与转向',
-      desc: '减震器、支柱、衬套 — 找回新车般的行驶质感。',
-      options: {
-        rideCheck: {
-          label: '行驶与操控检查',
-          desc: '异响、跑偏或颠簸声，路试加举升机双重检查。',
-        },
-        shocksStruts: {
-          label: '减震器更换',
-          desc: '优质配件更换，并复查四轮定位。',
-        },
-        steering: {
-          label: '转向系统维修',
-          desc: '转向机、拉杆和助力泄漏，彻底修好。',
-        },
-      },
-    },
-    smog: {
-      title: '尾气检测准备与维修',
-      desc: 'Smog 没过？我们找出原因、修好它，让您顺利过检。',
-      options: {
-        prep: {
-          label: '检测前预检',
-          desc: '先检查就绪监测项和常见问题点，心里有数再去检测。',
-        },
-        failedRepair: {
-          label: '未通过检测维修',
-          desc: '针对未通过的确切原因进行诊断和维修。',
-        },
-        readiness: {
-          label: '行驶循环 / 就绪监测协助',
-          desc: '维修或换电瓶后监测项未就绪？我们帮您完成行驶循环。',
-        },
-      },
-    },
-    transmission: {
-      title: '变速箱服务',
-      desc: '油液保养、故障诊断、离合器和换挡问题。',
-      options: {
-        fluidService: {
-          label: '变速箱油保养',
-          desc: '更换油液和滤芯，保持换挡顺滑、温度正常。',
-        },
-        diagnosis: {
-          label: '换挡问题诊断',
-          desc: '打滑、顿挫或报故障码 — 先诊断清楚，再谈维修。',
-        },
-        clutch: {
-          label: '离合器服务',
-          desc: '手动变速箱离合器的检查与更换。',
-        },
-      },
-    },
-    fleet: {
-      title: '卡车与车队服务',
-      desc: '让工作用车和小型车队按时保养、持续在路上。',
-      options: {
-        truckRepair: {
-          label: '卡车维修',
-          desc: '汽油和轻型柴油卡车，从刹车到传动系统。',
-        },
-        fleetMaintenance: {
-          label: '车队保养',
-          desc: '定期保养计划，最大限度减少停运时间。',
-        },
-        dot: {
-          label: '安全检查（DOT 级）',
-          desc: '为工作车辆出具全面车况报告。',
-        },
-      },
-    },
   },
 
   process: {
-    kicker: 'Neil’s 的规矩',
+    kicker: 'Castro 的规矩',
     title: '不玩套路。从来不。',
-    intro: '四个步骤，对每一辆进店的车都一样 — 五十年来始终如此。',
+    intro: '四个步骤，对每一辆进店的车都一样 — 460 条五星好评就是这么来的。',
     steps: [
       {
         title: '倾听与检查',
@@ -302,87 +248,95 @@ export const zh: Dict = {
       },
       {
         title: '明明白白的报价',
-        desc: '开工前给您详细的书面报价，每一块钱都由您批准。',
+        desc: '开工前价格说清楚，每一块钱都由您批准。',
       },
       {
         title: '一次修好',
-        desc: '大师级技师的手艺加优质配件 — 不走捷径，不强行推销。',
+        desc: '老师傅的手艺加优质配件 — 不走捷径，不强行推销。',
       },
       {
-        title: '路试并终身负责',
-        desc: '每项维修都经过路试验证，并有我们的质保背书。',
+        title: '路试后再交车',
+        desc: '每项维修都经过路试验证，才把钥匙交还给您。',
       },
     ],
   },
 
   why: {
-    kicker: '为什么选 Neil’s',
-    title: '街坊邻居都信赖的修车行',
+    kicker: '为什么选 Castro',
+    title: '您直接和修车师傅对话，而不是客服中心',
     body:
-      '从七十年代初起，同一个家族守着 Garfield 大道的这个街角 — 走过油荒、化油器、行车电脑到混合动力。4S 店的员工换了一批又一批；我们记得您的名字，也记得您车子的每一次保养。',
+      '这是一家老板亲自经营的修理厂：Juan Castro 就在车间里、引擎盖下、柜台前。顾客评价翻来覆去就是那三个词 — 快、公道、修得好。这就是全部的经营之道。',
     points: [
-      'AAA 认证维修厂 — 会员工时费和配件享 9 折（最高省 $75）',
-      '大师级技师坐镇，原厂级诊断设备',
-      '任何工作开始前先出具详细书面报价',
-      '修车期间提供免费接送',
-      '大多数维修当天完工',
+      '老板亲自经营 — 给您报价的人就是修车的人',
+      '任何工作开始前，价格先说清楚',
+      '交车快 — 大多数维修当天完工',
+      '保时捷与奔驰专业维修',
+      '接受刷卡 · 等候有免费 Wi-Fi · 无障碍入口',
       '提供英语、西班牙语和中文服务',
     ],
-    statYears: '家族经营年数',
     statRating: '平均真实评分',
     statReviews: '全平台评价数',
     statDays: '每周营业天数',
+    statOwner: '老板亲自经营',
   },
 
   testimonials: {
     kicker: '口碑相传',
-    title: '阿罕布拉的老顾客一来再来',
-    note: '内容代表 Yelp、CARFAX 和 SureCritic 上经过验证的顾客评价。',
+    title: '艾尔蒙特的老顾客一来再来',
+    note: '内容代表 Yelp 和 Birdeye 上经过验证的顾客评价。',
     items: [
       {
         quote:
-          '他们找到了真正的病根，而不是乱换零件，打电话报了个明明白白的价格，当天下午我就把车开走了。',
-        name: 'M. Trujillo',
-        detail: 'Honda Accord · 阿罕布拉',
+          '又快又利索 — 他找到了问题，报了个很实在的价格，当天就修好了。街坊修车行就该是这个样子。',
+        name: 'R. Mendoza',
+        detail: 'Honda Civic · 艾尔蒙特',
       },
       {
         quote:
-          '作为 AAA 会员我本来是冲着折扣来的，留下来却是因为他们的实在。动手之前，他们先把磨损的刹车盘拿给我看。',
-        name: 'K. Wong',
-        detail: 'Lexus RX · 蒙特利公园',
+          '我的奔驰不去 4S 店，就来这里。一样的工艺，账单只有零头，而且 Juan 动手之前会把一切解释清楚。',
+        name: 'K. Lam',
+        detail: 'Mercedes-Benz C300 · 柔似蜜',
       },
       {
-        quote:
-          '跟他们聊过一次，你就明白这家店为什么能开五十年。我们家三辆车都交给了这家店。',
-        name: 'D. Nguyen',
-        detail: 'Toyota Camry Hybrid · 圣盖博',
+        quote: '“靠谱”两个字。我们家三辆车，全都开来 Castro。他说多少钱，就是多少钱。',
+        name: 'D. Alvarez',
+        detail: 'Ford F-150 · 南艾尔蒙特',
       },
     ],
   },
 
   visitBand: {
     kicker: '欢迎到店',
-    title: 'Garfield 大道上，Valley 大道以南',
+    title: 'Garvey 大道，艾尔蒙特',
     addressLabel: '地址',
     phoneLabel: '电话',
     hoursLabel: '营业时间',
-    weekdays: '周一至周六',
-    sunday: '周日',
-    hoursValue: '上午 8:00 – 下午 6:00',
-    aaa: 'AAA 会员：工时费与配件 9 折，最高优惠 $75。',
+    hoursLines: ['周一、周三：上午 8:00 – 晚上 7:00', '周二 · 周四 · 周五：上午 8:00 – 下午 4:00', '周六、周日：休息'],
+    amenities: '接受刷卡 · 免费 Wi-Fi · 无障碍入口',
+    note:
+      '这样的店不靠广告 — 靠的是街坊介绍街坊。您来取钥匙时，干活的名字就是门口招牌上的名字。',
+    noteSign: '— Juan Castro 与 Castro Auto 一家',
+    humanLine: '营业时间来电，接电话的就是修车师傅 — 永远没有语音菜单。',
+    copyHint: '点击复制',
+    copied: '已复制！',
+    closesIn: '营业中 · {t}后打烊',
+    opensIn: '{t}后开门',
+    opensOn: '{day} {time} 开门',
+    mapTag: '我们在这里',
+    mapHint: '点击地图获取逐向导航',
   },
 
   servicesPage: {
     kicker: '服务项目',
     title: '真正的一站式服务。',
     intro:
-      '轿车、混动车、工作卡车 — 保养、维修，还有别家修不了的疑难杂症，一个屋檐下全部解决。',
+      '家用车、工作皮卡 — 保养、维修、排气、发动机大修，还有别家送去 4S 店的德国车，一个屋檐下全部解决。',
     groups: {
       maintenance: '定期保养',
       repair: '维修与诊断',
-      tiresBrakes: '轮胎与刹车',
+      tiresBrakes: '刹车与安全',
       climate: '空调与电气',
-      hybrid: '混动与电动',
+      hybrid: '欧洲车专修',
       fleet: '卡车与车队',
     },
     includes: '常见项目',
@@ -392,49 +346,49 @@ export const zh: Dict = {
 
   aboutPage: {
     kicker: '我们的故事',
-    title: '同一个街角，五十年',
+    title: '老板就是修车师傅',
     lead:
-      'Neil’s Express Automotive 是一家家族经营的全方位汽车与卡车维修厂，服务阿罕布拉和圣盖博谷已超过五十年。',
+      'Castro Auto Repair Service 是艾尔蒙特 Garvey 大道上一家老板亲自经营的修理厂 — 给您报价的人，就是给您修车的人。',
     story: [
-      '七十年代初，这家店在 South Garfield 大道开门营业，那还是白金触点和化油器的年代。工具换了一代又一代 — 握手的分量没变。',
-      '如今还是这个家族守在前台，背后是一位大师级技师和一支用原厂级设备诊断现代发动机、混动系统和各类电气问题的团队。',
-      '我们拿到了 AAA 认证维修厂资质和 RepairPal 认证，但最珍惜的荣誉，是街坊邻里给出的 4.9 星口碑。',
+      '很多修理厂在您和真正修车的人之间隔着一位服务顾问。在这里，这个距离不存在：Juan Castro 亲自管着车间，出厂的每一单活都写着他的名字。',
+      '业务从换油、刹车做到排气系统、三元催化和发动机整机大修 — 还有保时捷和奔驰的专业维修，帮街坊们省下 4S 店的账单。',
+      '结果都写在评价里：4.9 星的口碑，靠反复出现的三个词攒起来 — 快、公道、修得好。这份声誉，是这家店唯一需要的广告。',
     ],
     valuesTitle: '我们的原则',
     values: [
       {
-        title: '诚信为先',
-        desc: '开工前有书面报价，有任何变动先打电话。永远由您来批准。',
+        title: '有话直说',
+        desc: '开工前报价清楚，有任何变动先打电话。永远由您来批准。',
       },
       {
         title: '一次修好',
-        desc: '大师级诊断加优质配件，交车前必经路试。',
+        desc: '经验丰富的诊断加优质配件，交车前必经路试。',
       },
       {
         title: '是邻居，不是数字',
-        desc: '三代阿罕布拉家庭把车开进这些车位。我们还想再守三代。',
+        desc: '艾尔蒙特、南艾尔蒙特、柔似蜜 — 这家店靠的是附近人们的口口相传。',
       },
     ],
-    credsTitle: '认证与担当',
+    credsTitle: '大家为什么信任这家店',
     creds: [
-      { title: 'AAA 认证维修厂', desc: '设施经检查、服务标准经审核，会员享折扣。' },
-      { title: 'RepairPal 认证', desc: '对照全国维修数据的公道价格保证。' },
-      { title: '大师级技师坐镇', desc: '发动机、电气、行驶性能的资深认证。' },
-      { title: '4.9★ 真实评分', desc: 'Yelp、CARFAX 和 SureCritic 上数百条评价。' },
+      { title: '4.9★ 真实评分', desc: 'Yelp 和 Birdeye 上数百条评价。' },
+      { title: '老板在车间', desc: 'Juan Castro 报价、动手、负责到底。' },
+      { title: '欧洲车专修', desc: '保时捷和奔驰，不收 4S 店的溢价。' },
+      { title: '省心好打交道', desc: '接受刷卡、等候免费 Wi-Fi、无障碍入口。' },
     ],
     teamTitle: '您会见到的人',
     team: [
-      { role: '服务顾问', desc: '前台有问必答 — 英语、西班牙语、中文都行。' },
-      { role: '大师级技师', desc: '疑难杂症到此为止：发动机、电子系统、混动。' },
-      { role: '维修技师', desc: '刹车、轮胎、保养 — 细致准时。' },
-      { role: '接送司机', desc: '修车期间送您回家或上班。' },
+      { role: 'Juan — 老板兼主修师傅', desc: '疑难杂症到此为止：发动机、电气、欧洲车。' },
+      { role: '维修技师', desc: '刹车、排气、保养 — 细致准时。' },
+      { role: '前台', desc: '英语、西班牙语、中文，有问必答。' },
+      { role: '您', desc: '真的 — 走进来提问，跟我们一起看看引擎盖下面。' },
     ],
   },
 
   visitPage: {
     kicker: '到店信息',
     title: '好找，更好打交道。',
-    intro: '我们位于阿罕布拉市中心的 South Garfield 大道，距 Valley 大道和 10 号高速只需几分钟。',
+    intro: '我们位于艾尔蒙特 Garvey 大道，Rio Hondo 河东侧 — 距 10 号、60 号和 605 号高速都只需几分钟。',
     mapCta: '在 Google 地图中打开',
     formTitle: '给我们留言',
     formIntro: '咨询、询价，或者更想用文字说的事 — 每条留言我们都会看。',
@@ -451,16 +405,16 @@ export const zh: Dict = {
         a: '欢迎直接到店，但预约客户的车会最先上举升机。在线预约只需两分钟左右。',
       },
       {
-        q: '有 AAA 会员折扣吗？',
-        a: '有 — 我们是 AAA 认证维修厂。会员工时费和配件享 9 折，每次最高优惠 $75。',
+        q: '修欧洲车吗？',
+        a: '修 — 保时捷和奔驰是本店专长，从定期保养到电脑诊断，价格只是 4S 店的零头。',
       },
       {
-        q: '能修我的混动车吗？',
-        a: '当然。混动系统诊断、高压电池问题和日常保养我们都做。',
+        q: '维修怎么收费？',
+        a: '任何工作开始前先给您明确报价，有变动先打电话。说好的价格就是最后的价格。',
       },
       {
-        q: '修车期间我怎么出行？',
-        a: '预约时告诉我们需要免费接送，也可以在休息室等候，或使用提前钥匙投递，修好后我们电话通知您。',
+        q: '修车时可以在店里等吗？',
+        a: '当然 — 有免费 Wi-Fi 和无障碍入口。大活儿的话把车放下，修好第一时间打电话给您。',
       },
     ],
   },
@@ -473,7 +427,7 @@ export const zh: Dict = {
 
   footer: {
     blurb:
-      'Garfield 大道上家族经营、AAA 认证的汽车与卡车维修厂 — 服务阿罕布拉和圣盖博谷 50 余年。',
+      'Garvey 大道上老板亲自经营的修理厂 — 以快、公道、一次修好的口碑，服务艾尔蒙特、南艾尔蒙特和圣盖博谷。',
     quickLinks: '快速导航',
     servicesTitle: '热门服务',
     contactTitle: '联系与营业时间',
@@ -492,7 +446,7 @@ export const zh: Dict = {
       '联系电话',
       '您的信息',
       '车辆信息',
-      '出行安排',
+      '交车方式',
       '日期与时间',
       '确认预约',
     ],
@@ -505,7 +459,7 @@ export const zh: Dict = {
     s2Sub: '选择最合适的一项。',
 
     s3Title: '补充信息',
-    s3Sub: '还有什么需要让技师知道的吗？',
+    s3Sub: '还有什么需要让师傅知道的吗？',
     s3Selected: '您已选择的服务：',
     s3Label: '备注或特殊要求',
     s3Placeholder: '例如："左转时有吱吱声"，或"周五之前要用车"。',
@@ -543,22 +497,18 @@ export const zh: Dict = {
     s6PlateHelp: '选填 — 方便我们调出您的保养记录。',
     s6YearPh: '选择年份',
     s6MakePh: '选择品牌',
-    s6ModelPh: '如 Civic、RAV4、F-150',
+    s6ModelPh: '如 Civic、C300、F-150',
 
     s7Title: '修车期间…',
-    s7Sub: '您打算怎么安排？',
+    s7Sub: '您打算怎么安排交车？',
     s7Options: {
       wait: {
         label: '我在店里等',
-        desc: '舒适的休息室，有 Wi-Fi — 适合两小时以内的服务。',
+        desc: '等候有免费 Wi-Fi — 适合两小时以内的服务。',
       },
       dropoff: {
         label: '放下车，稍后来取',
-        desc: '车交给我们，修好第一时间打电话。支持提前钥匙投递。',
-      },
-      shuttle: {
-        label: '请安排免费接送',
-        desc: '修车期间送您回家或到附近上班。',
+        desc: '车交给我们，修好第一时间打电话。',
       },
     },
 
@@ -570,7 +520,7 @@ export const zh: Dict = {
     s8Slots: '选择时段',
     s8SpotsLeft: '剩 {count} 位',
     s8Full: '已满',
-    s8ClosedSunday: '周日休息 — 请选择其他日期。',
+    s8Closed: '那天休息 — 选个工作日，我们好好为您服务。',
     s8SlotNote: '每个时段最多接待 {max} 辆车，确保每辆车都得到用心对待。',
 
     s9Title: '确认预约',
@@ -580,13 +530,13 @@ export const zh: Dict = {
     s9Done: '预计完成',
     s9Vehicle: '车辆',
     s9PlateLabel: '车牌号',
-    s9Transport: '出行安排',
+    s9Transport: '交车方式',
     s9Services: '服务项目',
     s9Contact: '联系方式',
     s9Notes: '备注',
     s9ConfirmTitle: '请确认以下事项',
-    s9Confirm1: '我的车辆将于 {date} {time} 前到达 Neil’s Express Automotive。',
-    s9Confirm2: '我了解可以使用钥匙投递，最早提前 24 小时交车。',
+    s9Confirm1: '我的车辆将于 {date} {time} 前到达 Castro Auto Repair。',
+    s9Confirm2: '我了解店家会先来电确认，预约才最终生效。',
     s9Submit: '确认预约',
 
     successTitle: '{name}，预约成功！',

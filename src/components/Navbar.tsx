@@ -137,8 +137,7 @@ export function Navbar() {
 
               <p className="mt-6 flex items-center gap-2 text-sm text-dim">
                 <span className={`h-2 w-2 rounded-full ${isOpenNow() ? 'bg-emerald-400' : 'bg-red-400'}`} />
-                {isOpenNow() ? d.common.openNow : d.common.closedNow} · {d.visitBand.weekdays}{' '}
-                {d.visitBand.hoursValue}
+                {isOpenNow() ? d.common.openNow : d.common.closedNow} · {d.visitBand.hoursLines[0]}
               </p>
             </motion.nav>
           </motion.div>

@@ -75,6 +75,14 @@ const PATHS = {
       <path d="M16.5 12.4v1.7M16.5 18.9v1.7M12.4 16.5h1.7M18.9 16.5h1.7" />
     </>
   ),
+  muffler: (
+    <>
+      <rect x="5" y="9" width="13.5" height="7" rx="3.4" />
+      <path d="M2.5 12.5H5M18.5 12.5h3" />
+      <path d="M9 9v7M13 9v7" opacity="0.6" />
+      <path d="M20 9.2v-1M21.5 10v-1.6" opacity="0.7" />
+    </>
+  ),
   truck: (
     <>
       <path d="M2.5 6.5h11v10h-11zM13.5 10h4.2l3.3 3.4v3.1h-3.4" />

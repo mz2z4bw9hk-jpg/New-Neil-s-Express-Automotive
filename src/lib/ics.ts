@@ -19,9 +19,9 @@ export function downloadICS(opts: {
   const ics = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Neils Express Automotive//Booking//EN',
+    'PRODID:-//Castro Auto Repair Service//Booking//EN',
     'BEGIN:VEVENT',
-    `UID:${opts.ref}@neilsexpress`,
+    `UID:${opts.ref}@castroautorepair`,
     `DTSTAMP:${stamp(new Date())}`,
     `DTSTART:${stamp(start)}`,
     `DTEND:${stamp(end)}`,

@@ -11,15 +11,15 @@ import { AdminDashboard } from './AdminDashboard';
  * localStorage. Swap for a real auth provider when wiring a backend.
  */
 const DEMO_USER = 'admin';
-const DEMO_PASS = 'garfield700';
-const SESSION_KEY = 'nea.admin.session';
+const DEMO_PASS = 'garvey9844';
+const SESSION_KEY = 'car.admin.session';
 
 export default function AdminApp() {
   const [authed, setAuthed] = useState(() => localStorage.getItem(SESSION_KEY) === '1');
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    document.title = "Staff Console — Neil's Express Automotive";
+    document.title = 'Staff Console — Castro Auto Repair Service';
   }, []);
 
   const onSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -81,7 +81,7 @@ export default function AdminApp() {
               <Icon name="arrowRight" size={15} />
             </button>
             <p className="rounded-lg bg-night-900/80 px-3 py-2 text-center text-xs text-faint">
-              Demo login: <span className="font-mono text-dim">admin</span> / <span className="font-mono text-dim">garfield700</span>
+              Demo login: <span className="font-mono text-dim">admin</span> / <span className="font-mono text-dim">garvey9844</span>
             </p>
           </form>
 

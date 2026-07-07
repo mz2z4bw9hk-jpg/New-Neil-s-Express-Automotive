@@ -19,7 +19,7 @@ export function isLang(v: string | undefined): v is Lang {
 }
 
 export function detectLang(): Lang {
-  const saved = localStorage.getItem('nea.lang');
+  const saved = localStorage.getItem('car.lang');
   if (isLang(saved ?? undefined)) return saved as Lang;
   const nav = navigator.language.toLowerCase();
   if (nav.startsWith('es')) return 'es';
@@ -40,7 +40,7 @@ export function I18nProvider({ lang, children }: { lang: Lang; children: ReactNo
   const navigate = useNavigate();
 
   useEffect(() => {
-    localStorage.setItem('nea.lang', lang);
+    localStorage.setItem('car.lang', lang);
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : lang;
     document.title = DICTS[lang].meta.title;
     const meta = document.querySelector('meta[name="description"]');
@@ -53,7 +53,7 @@ export function I18nProvider({ lang, children }: { lang: Lang; children: ReactNo
       d: DICTS[lang],
       setLang: (next) => {
         if (next === lang) return;
-        localStorage.setItem('nea.lang', next);
+        localStorage.setItem('car.lang', next);
         const { pathname, hash } = window.location;
         const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         const rel = pathname.startsWith(base) ? pathname.slice(base.length) : pathname;

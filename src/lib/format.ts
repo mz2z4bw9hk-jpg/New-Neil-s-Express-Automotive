@@ -60,3 +60,33 @@ export function minutesLabel(mins: number, locale: string): string {
 export function interpolate(template: string, vars: Record<string, string | number>): string {
   return template.replace(/\{(\w+)\}/g, (_, k) => String(vars[k] ?? `{${k}}`));
 }
+
+export interface OpenStatus {
+  open: boolean;
+  /** Minutes until close (when open) or until next opening (when closed). */
+  minutes: number;
+  /** The Date of the next opening, for weekday labelling when closed. */
+  nextOpen: Date;
+}
+
+/** Live shop-hours status for the countdown chips. */
+export function openStatus(
+  hours: ({ open: number; close: number } | null)[],
+  now = new Date(),
+): OpenStatus {
+  const t = now.getHours() + now.getMinutes() / 60;
+  const today = hours[now.getDay()];
+  if (today && t >= today.open && t < today.close) {
+    return { open: true, minutes: Math.round((today.close - t) * 60), nextOpen: now };
+  }
+  for (let i = 0; i < 8; i++) {
+    const d = new Date(now);
+    d.setDate(d.getDate() + i);
+    const h = hours[d.getDay()];
+    if (!h) continue;
+    if (i === 0 && t >= h.open) continue; // already past today's opening
+    d.setHours(Math.floor(h.open), Math.round((h.open % 1) * 60), 0, 0);
+    return { open: false, minutes: Math.round((d.getTime() - now.getTime()) / 60_000), nextOpen: d };
+  }
+  return { open: false, minutes: 0, nextOpen: now };
+}

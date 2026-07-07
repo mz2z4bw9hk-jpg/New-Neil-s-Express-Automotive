@@ -1,7 +1,7 @@
-# Neil's Express Automotive — Website
+# Castro Auto Repair Service — Website
 
-A cinematic, trilingual marketing + booking site for **Neil's Express Automotive**, the family-owned,
-AAA-approved auto & truck repair shop at 700 S Garfield Ave, Alhambra, CA.
+A cinematic, trilingual marketing + booking site for **Castro Auto Repair Service**, the
+owner-operated shop at 9844 Garvey Ave, El Monte, CA 91733.
 
 Built with React 18, TypeScript, Vite, Tailwind CSS and Framer Motion. No backend required to run —
 the booking system and staff console work end-to-end against a swappable browser-storage layer.
@@ -11,21 +11,22 @@ the booking system and staff console work end-to-end against a swappable browser
 - **Cinematic night-drive design** — a hand-drawn animated SVG hero scene (dusk sky, San Gabriel
   ridgelines, glowing taillights) with scroll parallax. Zero image payload above the fold, so the
   hero paints instantly on any connection or device.
-- **9-step booking wizard** — service → package → notes → phone → contact → vehicle → transportation
-  → date & time → review/confirm. Includes live slot capacity (max 3 vehicles per half-hour),
-  estimated service duration, license-plate autocomplete for returning customers, required
-  confirmations, an animated confirmation screen with a reference number (`NEA-YYYYMMDD-###`) and an
-  **Add to Calendar (.ics)** download.
-- **Staff console** at `/admin` — stats tiles, status workflow (Pending → Confirmed → In Service →
-  Completed / Cancelled), filters + search, booking detail drawer with admin notes, CSV export, and
-  a Messages inbox fed by the contact form. Demo sign-in: `admin` / `garfield700`.
+- **Handcrafted micro-interactions** — cursor-follow spotlight, magnetic CTAs with a light sheen,
+  live "closes in 2 hrs 10 min" hours chip, click-to-copy address, a signature flourish that draws
+  itself in, and a **street-accurate mini map** of the Garvey Ave / El Monte blocks (I-10, SR-60,
+  Rio Hondo, Rosemead Blvd, Santa Anita Ave, Peck Rd) that sketches itself in on scroll.
+- **9-step booking wizard** — service → package → notes → phone → contact → vehicle → drop-off
+  → date & time → review/confirm. Live slot capacity (max 3 vehicles per half-hour), split-schedule
+  aware (Mon/Wed to 7 PM, Tue/Thu/Fri to 4 PM, weekends closed), license-plate autocomplete for
+  returning customers, reference numbers (`CAR-YYYYMMDD-###`) and an **Add to Calendar (.ics)** download.
+- **Staff console** at `/admin` — a **Today board** (the shop's digital whiteboard with one-tap
+  call and one-click status advance), **walk-in quick-add**, **printable work orders**,
+  **per-customer visit history**, a **7-day load strip**, filters + search, CSV export, and a
+  Messages inbox fed by the contact form. Demo sign-in: `admin` / `garvey9844`.
 - **Trilingual**: English, Español, 中文 — every page and the entire wizard, with locale-prefixed
   URLs (`/en`, `/es`, `/zh`), browser-language detection and a persistent switcher.
-- **Motion done right** — scroll reveals, staggered cards, counter animations, marquee, step
-  transitions; everything honors `prefers-reduced-motion`.
 - **SEO & sharing** — LocalBusiness (AutoRepair) JSON-LD, Open Graph card, per-locale titles and
   descriptions, robots.txt, SPA fallbacks for Netlify (`_redirects`) and GitHub Pages (`404.html`).
-- **Live "Open now" logic** everywhere hours appear (Mon–Sat 8–6, closed Sunday).
 
 ## Getting started
 
@@ -41,30 +42,27 @@ npm run preview    # serve the production build
 The build is fully static.
 
 - **GitHub Pages (included)**: `.github/workflows/deploy.yml` builds and publishes on every push
-  to the default branch. Requirement: GitHub Pages must be available for the repo — public repos
-  on any plan, private repos need GitHub Pro/Team. If the first run's "configure-pages" step
-  fails, either make the repo public or enable Pages once under
-  **Settings → Pages → Source: GitHub Actions**, then re-run the workflow.
-- **Netlify / Vercel / Cloudflare Pages**: point at the repo, build command `npm run build`,
-  output `dist`. SPA fallback for Netlify is already included (`public/_redirects`).
+  to the default branch (repo must be public, or private on GitHub Pro with Pages enabled under
+  **Settings → Pages → Source: GitHub Actions**).
+- **Netlify / Vercel / Cloudflare Pages**: build command `npm run build`, output `dist`.
 - **Manual sub-path build**: `npm run build -- --base=/<repo-name>/` then publish `dist/`.
-  The postbuild step copies `index.html` to `404.html` so deep links work.
 
 ## Where things live
 
 ```
 src/
   lib/
-    site.ts            ← business facts (address, phone, hours, rating) — edit here first
+    site.ts            ← business facts (address, phone, split hours, rating) — edit here first
     services.ts        ← service catalog: durations, icons, wizard option ids
     i18n/en|es|zh.ts   ← all copy, typed against the English dictionary
     bookingStore.ts    ← demo persistence layer (localStorage) — swap for a real API here
     ics.ts             ← calendar-file generation
   components/
-    home/…             ← hero (SVG scene), marquee, services grid, process, stats, testimonials
+    StreetMap.tsx      ← hand-drawn El Monte street map (shared: home band + visit page)
+    home/…             ← hero (SVG scene), marquee, services grid, process, stats, visit band
     wizard/…           ← the 9-step booking flow
   pages/               ← Home, Services, About, Visit, 404
-  admin/               ← staff console (login + dashboard), code-split from the public site
+  admin/               ← staff console: dashboard, Today board, walk-in modal, work-order print
 ```
 
 ### Going live with a real backend
@@ -75,15 +73,17 @@ Every read/write goes through `src/lib/bookingStore.ts`. Replace those function 
 
 ## Content provenance
 
-- Address, phone, hours, AAA approval + member discount, RepairPal certification, 4.9★ rating,
-  50+ years family-owned, hybrid service and courtesy shuttle come from the shop's public listings
-  (Yelp, AAA, RepairPal, CARFAX) as of mid-2026 — verify before launch.
+- Name, address, phone, hours, ratings (4.9★ / 460+ reviews via Birdeye; 4.5★ on Yelp), services
+  (oil, brakes, exhaust & catalytic converters, batteries, A/C, engine service & rebuilds,
+  Porsche/Mercedes specialty), owner name (Juan Castro) and amenities (cards, free Wi-Fi,
+  accessible entrance) come from the shop's public listings — **verify with the owner before
+  launch**, especially the split hours, which vary slightly between sources.
 - **Testimonial quotes are illustrative** (written to represent themes in public reviews) — replace
   with real customer quotes in `src/lib/i18n/*.ts` (`testimonials.items`) before going live.
-- Review/rating counts change over time; update `reviewCount` in `src/lib/site.ts`.
+- The street map is hand-drawn at neighborhood scale (real street layout, not GIS-exact).
 
 ## Sample data
 
 On first load the staff console seeds a handful of sample bookings (flagged "sample data" in the
-detail view) so the dashboard demos well. "Reset sample data" at the bottom of the console clears
-everything, including your test bookings.
+detail view) so the dashboard demos well. "Reset sample data" in the console clears everything,
+including your test bookings.

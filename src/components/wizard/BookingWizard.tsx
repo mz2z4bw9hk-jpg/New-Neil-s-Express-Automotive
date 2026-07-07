@@ -33,7 +33,7 @@ interface State {
   vehicleMake: string;
   vehicleModel: string;
   plate: string;
-  transport?: 'wait' | 'dropoff' | 'shuttle';
+  transport?: 'wait' | 'dropoff';
   date: string;
   slot?: number;
   confirm1: boolean;
@@ -445,26 +445,30 @@ export default function BookingWizard({ preselect, onClose }: { preselect?: Serv
     <div role="radiogroup" aria-label={d.wizard.s7Title} className="mx-auto max-w-md">
       <StepHead icon="key" title={d.wizard.s7Title} sub={d.wizard.s7Sub} />
       <div className="grid gap-2.5">
-        {(Object.keys(d.wizard.s7Options) as Array<'wait' | 'dropoff' | 'shuttle'>).map((key) => (
+        {(Object.keys(d.wizard.s7Options) as Array<'wait' | 'dropoff'>).map((key) => (
           <OptionCard
             key={key}
             selected={s.transport === key}
             onSelect={() => patch({ transport: key })}
             title={d.wizard.s7Options[key].label}
             desc={d.wizard.s7Options[key].desc}
-            icon={<Icon name={key === 'wait' ? 'clock' : key === 'dropoff' ? 'key' : 'car'} size={19} />}
+            icon={<Icon name={key === 'wait' ? 'clock' : 'key'} size={19} />}
           />
         ))}
       </div>
     </div>
   );
 
-  /* step 8 helpers */
+  /* step 8 helpers — the shop runs a split schedule, so slots follow the day's hours */
   const today = new Date();
   const minDate = toISODate(today);
   const maxD = new Date();
   maxD.setDate(maxD.getDate() + 45);
-  const isSunday = s.date ? parseISODate(s.date).getDay() === 0 : false;
+  const dayHours = s.date ? SITE.hours[parseISODate(s.date).getDay()] : null;
+  const isClosedDay = !!s.date && !dayHours;
+  const daySlots = dayHours
+    ? SLOT_HOURS.filter((h) => h >= dayHours.open && h <= dayHours.close - 0.5)
+    : [];
   const isToday = s.date === minDate;
   const nowH = today.getHours() + today.getMinutes() / 60;
 
@@ -498,18 +502,18 @@ export default function BookingWizard({ preselect, onClose }: { preselect?: Serv
         className={inputCls}
       />
 
-      {isSunday && (
+      {isClosedDay && (
         <p className="mt-3 flex items-center gap-2 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300">
           <Icon name="clock" size={15} className="shrink-0" />
-          {d.wizard.s8ClosedSunday}
+          {d.wizard.s8Closed}
         </p>
       )}
 
-      {s.date && !isSunday && (
+      {s.date && !isClosedDay && (
         <div className="mt-5">
           <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-dim">{d.wizard.s8Slots} *</p>
           <div className="grid max-h-56 grid-cols-2 gap-2 overflow-y-auto pr-1 scrollbar-slim sm:grid-cols-4">
-            {SLOT_HOURS.map((h) => {
+            {daySlots.map((h) => {
               const taken = slotTaken(s.date, h);
               const left = SITE.maxPerSlot - taken;
               const past = isToday && h <= nowH;

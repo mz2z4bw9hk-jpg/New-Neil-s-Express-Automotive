@@ -1,6 +1,43 @@
-import { motion, useReducedMotion } from 'framer-motion';
-import { useEffect, type ReactNode } from 'react';
+import { motion, useMotionValue, useReducedMotion, useSpring } from 'framer-motion';
+import { useEffect, useRef, type PointerEvent as ReactPointerEvent, type ReactNode } from 'react';
 import { fadeRise, stagger, VIEWPORT } from '../lib/motion';
+
+/** Wraps a CTA so it leans a few pixels toward the cursor — quiet, expensive. */
+export function Magnetic({
+  children,
+  strength = 0.16,
+  className = '',
+}: {
+  children: ReactNode;
+  strength?: number;
+  className?: string;
+}) {
+  const reduce = useReducedMotion();
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const sx = useSpring(x, { stiffness: 260, damping: 22 });
+  const sy = useSpring(y, { stiffness: 260, damping: 22 });
+
+  const onMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (reduce || !ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    const clamp = (v: number) => Math.max(-6, Math.min(6, v));
+    x.set(clamp((e.clientX - (r.left + r.width / 2)) * strength));
+    y.set(clamp((e.clientY - (r.top + r.height / 2)) * strength));
+  };
+
+  const onLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.div ref={ref} style={{ x: sx, y: sy }} onPointerMove={onMove} onPointerLeave={onLeave} className={className}>
+      {children}
+    </motion.div>
+  );
+}
 
 /** Section shell with consistent vertical rhythm. */
 export function Section({

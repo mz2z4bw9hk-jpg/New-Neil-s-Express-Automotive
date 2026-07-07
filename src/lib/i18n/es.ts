@@ -2,9 +2,9 @@ import type { Dict } from './en';
 
 export const es: Dict = {
   meta: {
-    title: "Neil's Express Automotive — Taller mecánico en Alhambra, CA",
+    title: 'Castro Auto Repair Service — Taller mecánico en El Monte, CA',
     description:
-      'Taller familiar de reparación de autos y camiones en Alhambra por más de 50 años. Aprobado por AAA, en Garfield Ave. Reserve en línea en minutos.',
+      'Taller atendido por su dueño en Garvey Ave, El Monte. Cambio de aceite, frenos, escape y catalizadores, A/C, reconstrucción de motores, especialistas en Porsche y Mercedes. Reserve en línea en minutos.',
   },
 
   nav: {
@@ -41,26 +41,26 @@ export const es: Dict = {
   },
 
   hero: {
-    badge: 'Aprobado por AAA · Negocio familiar por 50+ años',
+    badge: 'Atendido por su dueño · 4.9★ · El Monte',
     titleA: 'MANEJE TRANQUILO,',
-    titleB: 'ALHAMBRA.',
+    titleB: 'EL MONTE.',
     tagline:
-      'Servicio automotriz honesto y experto en Garfield Ave — la misma familia manteniendo al Valle de San Gabriel en marcha por más de cincuenta años.',
+      'Servicio automotriz honesto y experto en Garvey Avenue — Juan Castro y su equipo lo arreglan rápido, lo arreglan bien y le dicen el precio de frente.',
     ctaPrimary: 'Reserve su servicio',
     ctaSecondary: 'Ver servicios',
-    statYears: 'Años en Alhambra',
     statRating: 'Calificación verificada',
+    statReviews: 'Reseñas de clientes',
     statDays: 'Días a la semana',
     scroll: 'Deslice',
   },
 
   marquee: [
-    'Taller aprobado por AAA',
-    'Certificado por RepairPal',
-    'Reseñas verificadas 4.9★',
-    'Técnico maestro en el taller',
-    'Diagnóstico y reparación de híbridos',
-    'Transporte de cortesía',
+    '4.9★ · Más de 460 reseñas verificadas',
+    'Atendido por su dueño',
+    'Especialistas en Porsche y Mercedes',
+    'Reconstrucción de motores',
+    'Escape y catalizadores',
+    'Precios justos, entrega rápida',
     'Se habla español',
     '我们说中文',
   ],
@@ -69,36 +69,36 @@ export const es: Dict = {
     kicker: 'Lo que hacemos',
     title: 'Cada sistema. Un solo taller.',
     intro:
-      'Desde un cambio de aceite rápido hasta un diagnóstico completo del motor — autos, SUVs, híbridos y camiones, bien reparados a la primera.',
+      'Desde un cambio de aceite rápido hasta una reconstrucción completa de motor — autos de diario, trocas de trabajo y europeos, bien reparados a la primera.',
     estimated: 'aprox. {duration}',
   },
 
   services: {
     oil: {
-      title: 'Aceite y fluidos',
-      desc: 'Cambios de aceite rápidos y limpios, con inspección multipunto en cada visita.',
+      title: 'Cambio de aceite',
+      desc: 'Cambios de aceite rápidos y limpios, con revisión general en cada visita.',
       options: {
         conventional: {
           label: 'Servicio con aceite convencional',
-          desc: 'Aceite convencional de calidad y filtro, relleno de fluidos y revisión multipunto.',
+          desc: 'Aceite convencional de calidad y filtro, relleno de fluidos, revisión rápida.',
         },
         fullSynthetic: {
           label: 'Servicio full sintético',
           desc: 'Aceite sintético premium y filtro para motores modernos e intervalos más largos.',
         },
         valuePackage: {
-          label: 'Paquete de mantenimiento (mejor valor)',
-          desc: 'Servicio sintético más rotación de llantas, prueba de batería y prueba de manejo.',
+          label: 'Aceite + chequeo (mejor valor)',
+          desc: 'Servicio sintético más prueba de batería, revisión de frenos y prueba de manejo.',
         },
       },
     },
     brakes: {
-      title: 'Frenos: servicio y reparación',
+      title: 'Servicio de frenos',
       desc: 'Balatas, discos, calipers y líquido — frenadas seguras, sin adivinanzas.',
       options: {
         inspection: {
           label: 'Inspección de frenos',
-          desc: 'Medición completa de balatas, discos y líneas con reporte por escrito.',
+          desc: 'Medición completa de balatas, discos y líneas, con una respuesta directa.',
         },
         padsRotors: {
           label: 'Balatas y discos',
@@ -110,27 +110,9 @@ export const es: Dict = {
         },
       },
     },
-    tires: {
-      title: 'Llantas y alineación',
-      desc: 'Rotación, balanceo, llantas nuevas y alineación de precisión.',
-      options: {
-        rotationBalance: {
-          label: 'Rotación y balanceo',
-          desc: 'Empareja el desgaste y suaviza el andar en carretera.',
-        },
-        newTires: {
-          label: 'Llantas nuevas',
-          desc: 'Marcas de calidad según su manejo — montadas y balanceadas.',
-        },
-        alignment: {
-          label: 'Alineación',
-          desc: 'Alineación computarizada para eliminar jalones y desgaste disparejo.',
-        },
-      },
-    },
     diagnostics: {
-      title: 'Diagnóstico de motor',
-      desc: 'Luz de “check engine” descifrada con escáneres de nivel de agencia.',
+      title: 'Diagnóstico y reparación de motor',
+      desc: 'La luz de “check engine” rastreada hasta la causa real — y reparada.',
       options: {
         checkEngine: {
           label: 'Luz de check engine',
@@ -140,15 +122,33 @@ export const es: Dict = {
           label: 'Inspección pre-compra',
           desc: 'Sepa qué está comprando antes de firmar cualquier cosa.',
         },
-        electrical: {
+        drivability: {
           label: 'Problema de manejo',
           desc: 'Se apaga, titubea, marcha irregular — lo encontramos.',
         },
       },
     },
+    exhaust: {
+      title: 'Escape y catalizadores',
+      desc: 'Mofles, tubos y catalizadores — silencioso, legal y sin fugas.',
+      options: {
+        inspection: {
+          label: 'Inspección de escape',
+          desc: 'Fugas, ruidos y óxido revisados de punta a punta en la rampa.',
+        },
+        catConverter: {
+          label: 'Catalizador',
+          desc: 'Diagnóstico y reemplazo con convertidores de calidad y en regla.',
+        },
+        mufflerPipes: {
+          label: 'Mofle y tubería',
+          desc: 'Reparación o reemplazo de mofle y tubos, con soldadura limpia.',
+        },
+      },
+    },
     ac: {
-      title: 'Aire acondicionado y calefacción',
-      desc: 'Veranos fríos, inviernos cálidos — climatización bien hecha.',
+      title: 'Aire acondicionado',
+      desc: 'Aire frío para los veranos de El Monte — A/C diagnosticado y bien hecho.',
       options: {
         performanceCheck: {
           label: 'Prueba de rendimiento de A/C',
@@ -165,12 +165,12 @@ export const es: Dict = {
       },
     },
     battery: {
-      title: 'Batería y sistema eléctrico',
+      title: 'Baterías y sistema eléctrico',
       desc: 'Pruebas, baterías, marchas, alternadores y fallas eléctricas misteriosas.',
       options: {
         testReplace: {
           label: 'Prueba / reemplazo de batería',
-          desc: 'Prueba de carga con impresión; instalamos batería de calidad si hace falta.',
+          desc: 'Prueba de carga al momento; instalamos batería de calidad si hace falta.',
         },
         starterAlternator: {
           label: 'Marcha / alternador',
@@ -182,13 +182,49 @@ export const es: Dict = {
         },
       },
     },
+    euro: {
+      title: 'Especialistas europeos',
+      desc: 'Servicio para Porsche y Mercedes-Benz sin la factura de la agencia.',
+      options: {
+        euroService: {
+          label: 'Servicio Porsche / Mercedes',
+          desc: 'Mantenimiento programado al pie de la letra para marcas alemanas.',
+        },
+        euroDiagnostics: {
+          label: 'Diagnóstico europeo',
+          desc: 'Escaneos de nivel de fábrica y planes de reparación honestos.',
+        },
+        euroBrakes: {
+          label: 'Frenos y suspensión europeos',
+          desc: 'Piezas de calidad original y trabajo a especificación.',
+        },
+      },
+    },
+    rebuild: {
+      title: 'Reconstrucción de motores',
+      desc: 'De desgastado a como nuevo — reconstrucciones en casa, a precio justo.',
+      options: {
+        evaluation: {
+          label: 'Evaluación del motor',
+          desc: 'Compresión, fugas e inspección antes de hablar de cifras grandes.',
+        },
+        topEnd: {
+          label: 'Trabajo de culata',
+          desc: 'Juntas de cabeza, válvulas y componentes de distribución.',
+        },
+        fullRebuild: {
+          label: 'Reconstrucción completa',
+          desc: 'Desarmado y reconstrucción total con presupuesto claro por escrito.',
+        },
+      },
+    },
     scheduled: {
-      title: 'Mantenimiento programado de fábrica',
-      desc: 'Servicios de 30/60/90 mil millas que protegen su garantía — sin precios de agencia.',
+      title: 'Mantenimiento programado',
+      desc: 'Servicios de 30/60/90 mil millas que cuidan su garantía y su auto.',
       options: {
         minor30k: {
           label: 'Servicio menor (tipo 30K)',
-          desc: 'Cambio de aceite, rotación, filtros e inspección completa.',
+          desc: 'Cambio de aceite, filtros e inspección completa.',
         },
         major60k: {
           label: 'Servicio mayor (tipo 60K/90K)',
@@ -200,191 +236,110 @@ export const es: Dict = {
         },
       },
     },
-    hybrid: {
-      title: 'Híbridos y eléctricos',
-      desc: 'Diagnóstico de híbridos, baterías de alto voltaje y mantenimiento de rutina.',
-      options: {
-        healthCheck: {
-          label: 'Chequeo de salud del híbrido',
-          desc: 'Estado de la batería HV, enfriamiento e inspección del inversor.',
-        },
-        hvBattery: {
-          label: 'Problema de batería HV',
-          desc: 'Luces de advertencia o pérdida de autonomía — probada a nivel de módulo.',
-        },
-        hybridService: {
-          label: 'Servicio programado de híbrido',
-          desc: 'Mantenimiento adaptado a trenes motrices y frenos híbridos.',
-        },
-      },
-    },
-    suspension: {
-      title: 'Suspensión y dirección',
-      desc: 'Amortiguadores, struts, bujes — recupere ese andar de auto nuevo.',
-      options: {
-        rideCheck: {
-          label: 'Revisión de andar y manejo',
-          desc: 'Ruidos, jalones o golpeteos inspeccionados en prueba de manejo y rampa.',
-        },
-        shocksStruts: {
-          label: 'Amortiguadores y struts',
-          desc: 'Reemplazos de calidad instalados con revisión de alineación.',
-        },
-        steering: {
-          label: 'Reparación de dirección',
-          desc: 'Cremalleras, terminales y fugas de dirección hidráulica, resueltas de verdad.',
-        },
-      },
-    },
-    smog: {
-      title: 'Preparación y reparación para el smog',
-      desc: '¿Reprobó el smog? Encontramos la causa, la reparamos y lo dejamos listo para pasar.',
-      options: {
-        prep: {
-          label: 'Chequeo pre-smog',
-          desc: 'Monitores de preparación y puntos problemáticos conocidos, revisados primero.',
-        },
-        failedRepair: {
-          label: 'Reparación por smog reprobado',
-          desc: 'Diagnóstico y reparación de la causa exacta del rechazo.',
-        },
-        readiness: {
-          label: 'Ayuda con ciclo de manejo / monitores',
-          desc: '¿Monitores “not ready” tras una reparación o cambio de batería? Completamos el ciclo.',
-        },
-      },
-    },
-    transmission: {
-      title: 'Servicio de transmisión',
-      desc: 'Servicios de fluido, diagnóstico, clutch y problemas de cambios.',
-      options: {
-        fluidService: {
-          label: 'Servicio de fluido de transmisión',
-          desc: 'Fluido y filtro para mantener los cambios suaves y la transmisión fresca.',
-        },
-        diagnosis: {
-          label: 'Problema de cambios',
-          desc: 'Patina, cambios bruscos o códigos — diagnóstico antes de hablar de cifras grandes.',
-        },
-        clutch: {
-          label: 'Servicio de clutch',
-          desc: 'Inspección y reemplazo para transmisiones manuales.',
-        },
-      },
-    },
-    fleet: {
-      title: 'Camiones y flotillas',
-      desc: 'Camiones de trabajo y flotillas pequeñas, al día y en la carretera.',
-      options: {
-        truckRepair: {
-          label: 'Reparación de camiones',
-          desc: 'Camiones de gasolina y diésel ligero, de frenos a tren motriz.',
-        },
-        fleetMaintenance: {
-          label: 'Mantenimiento de flotilla',
-          desc: 'Programas de servicio que minimizan el tiempo fuera de servicio.',
-        },
-        dot: {
-          label: 'Inspección de seguridad (estilo DOT)',
-          desc: 'Reporte completo de condición para vehículos de trabajo.',
-        },
-      },
-    },
   },
 
   process: {
-    kicker: 'El método Neil’s',
+    kicker: 'El método Castro',
     title: 'Sin sorpresas. Nunca.',
-    intro: 'Cuatro pasos, iguales para cada vehículo que entra — así ha sido por cincuenta años.',
+    intro: 'Cuatro pasos, iguales para cada auto que entra — así se ganan 460 reseñas de cinco estrellas.',
     steps: [
       {
         title: 'Escuchar e inspeccionar',
         desc: 'Primero lo escuchamos a usted; luego ponemos ojos e instrumentos reales sobre el problema.',
       },
       {
-        title: 'Presupuesto claro y directo',
-        desc: 'Presupuesto detallado por escrito antes de empezar. Usted aprueba cada dólar.',
+        title: 'Precio claro y directo',
+        desc: 'Un precio claro antes de empezar. Usted aprueba cada dólar.',
       },
       {
         title: 'Repararlo bien',
-        desc: 'Mano de obra de técnico maestro y piezas de calidad — sin atajos ni ventas forzadas.',
+        desc: 'Manos con experiencia y piezas de calidad — sin atajos ni ventas forzadas.',
       },
       {
         title: 'Prueba de manejo y respaldo',
-        desc: 'Cada reparación se verifica en la calle y está respaldada por nuestra garantía.',
+        desc: 'Cada reparación se verifica en la calle antes de devolver las llaves.',
       },
     ],
   },
 
   why: {
-    kicker: 'Por qué Neil’s',
-    title: 'El taller en el que sus vecinos ya confían',
+    kicker: 'Por qué Castro',
+    title: 'Usted habla con el mecánico, no con un call center',
     body:
-      'Desde principios de los setenta, una misma familia atiende esta esquina de Garfield Avenue — entre crisis de gasolina, carburadores, computadoras e híbridos. Las agencias rotan personal; nosotros recordamos su nombre y el historial de su auto.',
+      'Este taller lo atiende su dueño: Juan Castro está en el piso, bajo el cofre y en el mostrador. Las reseñas repiten las mismas tres cosas — rápido, justo y bien hecho. Ese es todo el plan de negocio.',
     points: [
-      'Taller aprobado por AAA — miembros ahorran 10% en mano de obra y piezas (hasta $75)',
-      'Técnico maestro en sitio, diagnóstico de nivel de agencia',
-      'Presupuesto detallado por escrito antes de cualquier trabajo',
-      'Transporte de cortesía mientras su auto está con nosotros',
-      'La mayoría de las reparaciones se terminan el mismo día',
+      'Atendido por su dueño — quien le cotiza el auto es quien lo repara',
+      'Precio claro antes de empezar cualquier trabajo',
+      'Entrega rápida — la mayoría de los trabajos salen el mismo día',
+      'Servicio especializado en Porsche y Mercedes-Benz',
+      'Aceptamos tarjetas · Wi-Fi gratis mientras espera · entrada accesible',
       'Atención en English, español y 中文',
     ],
-    statYears: 'Años como negocio familiar',
     statRating: 'Calificación promedio verificada',
     statReviews: 'Reseñas en todas las plataformas',
     statDays: 'Días abiertos por semana',
+    statOwner: 'Atendido por su dueño',
   },
 
   testimonials: {
     kicker: 'Lo que se dice',
-    title: 'Alhambra siempre regresa',
-    note: 'Representativo de reseñas verificadas de clientes en Yelp, CARFAX y SureCritic.',
+    title: 'El Monte siempre regresa',
+    note: 'Representativo de reseñas verificadas de clientes en Yelp y Birdeye.',
     items: [
       {
         quote:
-          'Encontraron el problema real en lugar de cambiar piezas al azar, me llamaron con un precio claro y esa misma tarde ya estaba manejando.',
-        name: 'M. Trujillo',
-        detail: 'Honda Accord · Alhambra',
+          'Rápido y eficiente — encontró el problema, me cotizó un precio muy razonable y lo terminó el mismo día. Exactamente lo que debe ser un mecánico de barrio.',
+        name: 'R. Mendoza',
+        detail: 'Honda Civic · El Monte',
       },
       {
         quote:
-          'Como miembro de AAA vine por el descuento, pero me quedo por la honestidad. Me mostraron el disco desgastado antes de tocar nada.',
-        name: 'K. Wong',
-        detail: 'Lexus RX · Monterey Park',
+          'Traigo mi Mercedes aquí en lugar de la agencia. El mismo trabajo de calidad, una fracción de la factura, y Juan explica todo antes de tocar el auto.',
+        name: 'K. Lam',
+        detail: 'Mercedes-Benz C300 · Rosemead',
       },
       {
         quote:
-          'Cincuenta años de negocio cobran sentido en cuanto hablas con ellos. Mi familia ya confió tres autos a este taller.',
-        name: 'D. Nguyen',
-        detail: 'Toyota Camry Hybrid · San Gabriel',
+          'Confiable es la palabra. Tres autos en la familia y todos van con Castro. El precio que dice es el precio que paga.',
+        name: 'D. Alvarez',
+        detail: 'Ford F-150 · South El Monte',
       },
     ],
   },
 
   visitBand: {
     kicker: 'Venga a vernos',
-    title: 'En Garfield, al sur de Valley',
+    title: 'En Garvey Ave, El Monte',
     addressLabel: 'Dirección',
     phoneLabel: 'Teléfono',
     hoursLabel: 'Horario',
-    weekdays: 'Lun – Sáb',
-    sunday: 'Domingo',
-    hoursValue: '8:00 AM – 6:00 PM',
-    aaa: 'Miembros de AAA: 10% de descuento en mano de obra y piezas, hasta $75.',
+    hoursLines: ['Lun y Mié: 8:00 AM – 7:00 PM', 'Mar · Jue · Vie: 8:00 AM – 4:00 PM', 'Sáb – Dom: Cerrado'],
+    amenities: 'Aceptamos tarjetas · Wi-Fi gratis · Entrada accesible',
+    note:
+      'Un taller así no vive de anuncios — vive de vecinos que recomiendan a vecinos. Cuando recoja sus llaves, el nombre del trabajo es el mismo que está en la puerta.',
+    noteSign: '— Juan Castro y la familia de Castro Auto',
+    humanLine: 'Llame en horario del taller y contesta un mecánico — nunca un menú grabado.',
+    copyHint: 'Clic para copiar',
+    copied: '¡Copiado!',
+    closesIn: 'Abierto ahora · cierra en {t}',
+    opensIn: 'Abre en {t}',
+    opensOn: 'Abre el {day} a las {time}',
+    mapTag: 'Aquí estamos',
+    mapHint: 'Toque el mapa para indicaciones paso a paso',
   },
 
   servicesPage: {
     kicker: 'Servicios',
     title: 'Servicio completo. De verdad.',
     intro:
-      'Un solo techo para todo lo que su auto, híbrido o camión de trabajo necesita — mantenimiento, reparación y esos problemas tercos que otros talleres rechazan.',
+      'Un solo techo para todo lo que su auto o troca necesita — mantenimiento, reparación, escape, reconstrucción de motores, y los autos alemanes que otros talleres mandan a la agencia.',
     groups: {
       maintenance: 'Mantenimiento',
       repair: 'Reparación y diagnóstico',
-      tiresBrakes: 'Llantas y frenos',
+      tiresBrakes: 'Frenos y seguridad',
       climate: 'Clima y eléctrico',
-      hybrid: 'Híbridos y EV',
-      fleet: 'Camiones y flotillas',
+      hybrid: 'Especialistas europeos',
+      fleet: 'Trocas y flotillas',
     },
     includes: 'Solicitudes comunes',
     ctaTitle: '¿No sabe qué necesita?',
@@ -393,42 +348,42 @@ export const es: Dict = {
 
   aboutPage: {
     kicker: 'Nuestra historia',
-    title: 'Cincuenta años en la misma esquina',
+    title: 'El dueño es el mecánico',
     lead:
-      'Neil’s Express Automotive es un taller familiar de servicio completo para autos y camiones que ha servido a Alhambra y al Valle de San Gabriel por más de cinco décadas.',
+      'Castro Auto Repair Service es un taller atendido por su dueño en Garvey Avenue, El Monte — el tipo de lugar donde quien le cotiza el auto es quien lo repara.',
     story: [
-      'El taller abrió sus puertas en South Garfield Avenue a principios de los setenta, cuando los platinos y carburadores dominaban el camino. Las herramientas cambiaron — el apretón de manos no.',
-      'Hoy la misma familia atiende el mostrador, respaldada por un técnico maestro y un equipo que diagnostica motores modernos, híbridos y todo lo eléctrico con equipo de nivel de agencia.',
-      'Hemos ganado el distintivo Approved Auto Repair de AAA y la certificación RepairPal, pero la credencial que más cuidamos es un récord de 4.9 estrellas con la gente de este vecindario.',
+      'En muchos talleres hay un asesor de servicio entre usted y la persona que de verdad trabaja en su auto. Aquí esa distancia no existe: Juan Castro dirige el piso, y su nombre va en cada trabajo que sale del lote.',
+      'El trabajo va desde cambios de aceite y frenos hasta sistemas de escape, catalizadores y reconstrucciones completas de motor — además de servicio especializado para Porsche y Mercedes-Benz que le ahorra a los vecinos la factura de la agencia.',
+      'El resultado se ve en las reseñas: un récord de 4.9 estrellas construido sobre tres palabras que se repiten una y otra vez — rápido, justo, bien hecho. Esa reputación es la única publicidad que este taller ha necesitado.',
     ],
     valuesTitle: 'Nuestros principios',
     values: [
       {
-        title: 'Honestidad primero',
-        desc: 'Presupuesto por escrito antes de empezar y una llamada antes de cualquier cambio. Su aprobación, siempre.',
+        title: 'Respuestas directas',
+        desc: 'Una cotización clara antes de empezar y una llamada antes de cualquier cambio. Su aprobación, siempre.',
       },
       {
         title: 'Bien a la primera',
-        desc: 'Diagnóstico de técnico maestro y piezas de calidad, con prueba de manejo antes de devolver las llaves.',
+        desc: 'Diagnóstico con experiencia y piezas de calidad, con prueba de manejo antes de devolver las llaves.',
       },
       {
         title: 'Vecinos, no números',
-        desc: 'Tres generaciones de familias de Alhambra han estacionado en estas bahías. Planeamos tres más.',
+        desc: 'El Monte, South El Monte, Rosemead — este taller vive de la recomendación de la gente de aquí.',
       },
     ],
-    credsTitle: 'Certificados y responsables',
+    credsTitle: 'Por qué la gente confía',
     creds: [
-      { title: 'AAA Approved Auto Repair', desc: 'Instalaciones inspeccionadas, estándares verificados, descuentos para miembros.' },
-      { title: 'Certificado RepairPal', desc: 'Garantía de precio justo medida contra datos nacionales de reparación.' },
-      { title: 'Técnico maestro en sitio', desc: 'Certificación de alto nivel en motor, eléctrico y manejo.' },
-      { title: 'Calificación verificada 4.9★', desc: 'Cientos de reseñas en Yelp, CARFAX y SureCritic.' },
+      { title: 'Calificación verificada 4.9★', desc: 'Cientos de reseñas en Yelp y Birdeye.' },
+      { title: 'El dueño en el piso', desc: 'Juan Castro lo cotiza, lo repara y lo respalda.' },
+      { title: 'Especialistas europeos', desc: 'Porsche y Mercedes-Benz sin el sobreprecio de la agencia.' },
+      { title: 'Fácil de tratar', desc: 'Tarjetas aceptadas, Wi-Fi gratis mientras espera, entrada accesible.' },
     ],
     teamTitle: 'A quién va a conocer',
     team: [
-      { role: 'Asesores de servicio', desc: 'Respuestas claras en el mostrador — en English, español o 中文.' },
-      { role: 'Técnico maestro', desc: 'Los diagnósticos difíciles terminan aquí: motores, electrónica, híbridos.' },
-      { role: 'Técnicos de servicio', desc: 'Frenos, llantas, mantenimiento — con cuidado y a tiempo.' },
-      { role: 'Chofer de cortesía', desc: 'Lo lleva a casa o al trabajo mientras nos encargamos del auto.' },
+      { role: 'Juan — Dueño y mecánico principal', desc: 'Los diagnósticos difíciles terminan aquí: motores, eléctrico, autos europeos.' },
+      { role: 'Técnicos de servicio', desc: 'Frenos, escape, mantenimiento — con cuidado y a tiempo.' },
+      { role: 'Mostrador', desc: 'Respuestas claras en English, español o 中文.' },
+      { role: 'Usted', desc: 'En serio — entre, pregunte, y asómese al cofre con nosotros.' },
     ],
   },
 
@@ -436,7 +391,7 @@ export const es: Dict = {
     kicker: 'Visítenos',
     title: 'Fácil de encontrar. Más fácil de tratar.',
     intro:
-      'Estamos en South Garfield Avenue, en el centro de Alhambra, a minutos de Valley Boulevard y la autopista 10.',
+      'Estamos en Garvey Avenue, El Monte, justo al este del Río Hondo — a minutos de la 10, la 60 y la 605.',
     mapCta: 'Abrir en Google Maps',
     formTitle: 'Envíenos un mensaje',
     formIntro: 'Preguntas, cotizaciones o algo que prefiera escribir — leemos cada mensaje.',
@@ -453,16 +408,16 @@ export const es: Dict = {
         a: 'Puede llegar sin cita, pero con reservación su auto sube a la rampa más rápido. Reservar en línea toma unos dos minutos.',
       },
       {
-        q: '¿Aceptan descuentos de AAA?',
-        a: 'Sí — somos un taller AAA Approved Auto Repair. Los miembros reciben 10% de descuento en mano de obra y piezas, hasta $75 por visita.',
+        q: '¿Trabajan autos europeos?',
+        a: 'Sí — Porsche y Mercedes-Benz son especialidad de la casa, desde mantenimiento hasta diagnóstico, a una fracción del precio de agencia.',
       },
       {
-        q: '¿Pueden dar servicio a mi híbrido?',
-        a: 'Claro que sí. Atendemos diagnóstico de híbridos, baterías de alto voltaje y mantenimiento de rutina.',
+        q: '¿Cómo cotizan las reparaciones?',
+        a: 'Recibe un precio claro antes de empezar cualquier trabajo, y le llamamos antes de cualquier cambio. El precio que decimos es el que paga.',
       },
       {
-        q: '¿Cómo me muevo mientras tienen mi auto?',
-        a: 'Pregunte por el transporte de cortesía al reservar, espere en nuestra sala, o use el buzón de llaves y le llamamos al terminar.',
+        q: '¿Puedo esperar mientras trabajan?',
+        a: 'Claro — hay Wi-Fi gratis y entrada accesible. Para trabajos grandes, deje el auto y le llamamos en cuanto esté listo.',
       },
     ],
   },
@@ -475,7 +430,7 @@ export const es: Dict = {
 
   footer: {
     blurb:
-      'Taller familiar de autos y camiones aprobado por AAA en Garfield Avenue — sirviendo a Alhambra y al Valle de San Gabriel por 50+ años.',
+      'Taller atendido por su dueño en Garvey Avenue — sirviendo a El Monte, South El Monte y el Valle de San Gabriel con trabajo rápido, justo y bien hecho.',
     quickLinks: 'Explorar',
     servicesTitle: 'Servicios populares',
     contactTitle: 'Contacto y horario',
@@ -494,7 +449,7 @@ export const es: Dict = {
       'Teléfono',
       'Sus datos',
       'Vehículo',
-      'Transporte',
+      'Entrega',
       'Fecha y hora',
       'Revisar y confirmar',
     ],
@@ -507,7 +462,7 @@ export const es: Dict = {
     s2Sub: 'Elija la opción que mejor le quede.',
 
     s3Title: 'Información adicional',
-    s3Sub: '¿Hay algo más que su técnico deba saber?',
+    s3Sub: '¿Hay algo más que su mecánico deba saber?',
     s3Selected: 'Su servicio seleccionado:',
     s3Label: 'Comentarios o instrucciones especiales',
     s3Placeholder:
@@ -547,22 +502,18 @@ export const es: Dict = {
     s6PlateHelp: 'Opcional — nos ayuda a encontrar su historial de servicio.',
     s6YearPh: 'Seleccione un año',
     s6MakePh: 'Seleccione una marca',
-    s6ModelPh: 'ej. Civic, RAV4, F-150',
+    s6ModelPh: 'ej. Civic, C300, F-150',
 
     s7Title: 'Mientras trabajamos…',
     s7Sub: '¿Cómo prefiere manejar la entrega?',
     s7Options: {
       wait: {
         label: 'Espero en el taller',
-        desc: 'Sala cómoda con Wi-Fi — ideal para servicios de menos de dos horas.',
+        desc: 'Wi-Fi gratis mientras espera — ideal para servicios de menos de dos horas.',
       },
       dropoff: {
         label: 'Lo dejo y paso después',
-        desc: 'Deje el auto con nosotros; le llamamos en cuanto esté listo. Buzón de llaves disponible.',
-      },
-      shuttle: {
-        label: 'Transporte de cortesía, por favor',
-        desc: 'Lo llevamos a casa o al trabajo cerca mientras atendemos su auto.',
+        desc: 'Deje el auto con nosotros; le llamamos en cuanto esté listo.',
       },
     },
 
@@ -574,7 +525,7 @@ export const es: Dict = {
     s8Slots: 'Seleccione horario',
     s8SpotsLeft: '{count} lugares',
     s8Full: 'Lleno',
-    s8ClosedSunday: 'Cerramos los domingos — elija cualquier otro día.',
+    s8Closed: 'Ese día estamos cerrados — elija un día entre semana y con gusto lo atendemos.',
     s8SlotNote: 'Máximo {max} vehículos por horario, para que cada auto reciba atención real.',
 
     s9Title: 'Revisar y confirmar',
@@ -584,13 +535,13 @@ export const es: Dict = {
     s9Done: 'Término estimado',
     s9Vehicle: 'Vehículo',
     s9PlateLabel: 'Placas',
-    s9Transport: 'Transporte',
+    s9Transport: 'Entrega',
     s9Services: 'Servicio',
     s9Contact: 'Contacto',
     s9Notes: 'Notas',
     s9ConfirmTitle: 'Confirmaciones requeridas',
-    s9Confirm1: 'Mi vehículo estará en Neil’s Express Automotive antes de las {time} el {date}.',
-    s9Confirm2: 'Entiendo que puedo dejar mi vehículo hasta 24 horas antes usando el buzón de llaves.',
+    s9Confirm1: 'Mi vehículo estará en Castro Auto Repair antes de las {time} el {date}.',
+    s9Confirm2: 'Entiendo que el taller me llamará para confirmar esta cita antes de que sea definitiva.',
     s9Submit: 'Reservar cita',
 
     successTitle: '¡Listo, {name}, su cita está reservada!',

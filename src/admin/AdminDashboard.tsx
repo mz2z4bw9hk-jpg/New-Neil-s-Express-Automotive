@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
+  customerHistory,
   listBookings,
   listMessages,
   markMessageRead,
@@ -10,40 +11,27 @@ import {
   type Booking,
   type BookingStatus,
 } from '../lib/bookingStore';
-import { en } from '../lib/i18n/en';
 import { formatDateLong, slotLabel, toISODate } from '../lib/format';
 import { Logo } from '../components/Logo';
 import { Icon } from '../components/icons';
 import { ModalShell } from '../components/ui';
-
-const STATUS_META: Record<BookingStatus, { label: string; cls: string }> = {
-  pending: { label: 'Pending', cls: 'bg-amber-400/15 text-amber-300 border-amber-400/30' },
-  confirmed: { label: 'Confirmed', cls: 'bg-electric/15 text-blue-300 border-electric/30' },
-  inService: { label: 'In Service', cls: 'bg-purple-400/15 text-purple-300 border-purple-400/30' },
-  completed: { label: 'Completed', cls: 'bg-emerald-400/15 text-emerald-300 border-emerald-400/30' },
-  cancelled: { label: 'Cancelled', cls: 'bg-red-400/15 text-red-300 border-red-400/30' },
-};
-
-const STATUSES = Object.keys(STATUS_META) as BookingStatus[];
-
-function StatusBadge({ status }: { status: BookingStatus }) {
-  const m = STATUS_META[status];
-  return (
-    <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[0.68rem] font-bold ${m.cls}`}>
-      {m.label}
-    </span>
-  );
-}
-
-function serviceLabel(b: Booking): string {
-  const svc = en.services[b.serviceId];
-  const opt = (svc.options as Record<string, { label: string }>)[b.optionId];
-  return opt ? `${svc.title} — ${opt.label}` : svc.title;
-}
+import { ScheduleBoard } from './ScheduleBoard';
+import { WalkInModal } from './WalkInModal';
+import { printWorkOrder } from './printWorkOrder';
+import {
+  adminInputCls,
+  NEXT_STATUS,
+  STATUS_META,
+  STATUSES,
+  StatusBadge,
+  serviceLabel,
+  telHref,
+  transportLabel,
+} from './shared';
 
 function exportCSV(rows: Booking[]): void {
   const esc = (v: string | number) => `"${String(v).replaceAll('"', '""')}"`;
-  const head = ['Reference', 'Status', 'Date', 'Time', 'Customer', 'Phone', 'Email', 'Vehicle', 'Plate', 'Service', 'Transport', 'Notes', 'Admin notes'];
+  const head = ['Reference', 'Status', 'Date', 'Time', 'Customer', 'Phone', 'Email', 'Vehicle', 'Plate', 'Service', 'Drop-off', 'Notes', 'Admin notes'];
   const lines = rows.map((b) =>
     [
       b.ref,
@@ -56,7 +44,7 @@ function exportCSV(rows: Booking[]): void {
       `${b.vehicleYear} ${b.vehicleMake} ${b.vehicleModel}`,
       b.plate,
       serviceLabel(b),
-      b.transport,
+      transportLabel(b.transport),
       b.notes,
       b.adminNotes,
     ]
@@ -67,17 +55,65 @@ function exportCSV(rows: Booking[]): void {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `neils-bookings-${toISODate(new Date())}.csv`;
+  a.download = `castro-bookings-${toISODate(new Date())}.csv`;
   a.click();
   URL.revokeObjectURL(url);
+}
+
+/** Next 7 days at a glance — click a day to filter the table to it. */
+function LoadStrip({ bookings, active, onPick }: { bookings: Booking[]; active: string; onPick: (date: string) => void }) {
+  const days = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date();
+    d.setDate(d.getDate() + i);
+    const iso = toISODate(d);
+    const count = bookings.filter((b) => b.date === iso && b.status !== 'cancelled').length;
+    return {
+      iso,
+      count,
+      dow: d.toLocaleDateString('en-US', { weekday: 'short' }),
+      dom: d.getDate(),
+    };
+  });
+  const max = Math.max(6, ...days.map((d) => d.count));
+
+  return (
+    <div className="card mt-6 flex items-end justify-between gap-2 px-5 py-4">
+      {days.map((day) => {
+        const selected = active === day.iso;
+        return (
+          <button
+            key={day.iso}
+            type="button"
+            onClick={() => onPick(selected ? '' : day.iso)}
+            className="group flex flex-1 flex-col items-center gap-1.5"
+            title={`${day.count} booking${day.count === 1 ? '' : 's'}`}
+          >
+            <span className={`text-[0.65rem] font-bold ${selected ? 'text-accent' : 'text-faint'}`}>{day.count}</span>
+            <span className="flex h-14 w-full max-w-9 items-end overflow-hidden rounded-md bg-night-900">
+              <motion.span
+                initial={{ height: 0 }}
+                animate={{ height: `${Math.max(6, (day.count / max) * 100)}%` }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className={`w-full rounded-md ${selected ? 'bg-accent' : 'bg-electric/50 group-hover:bg-electric/80'}`}
+              />
+            </span>
+            <span className={`text-[0.65rem] font-semibold uppercase ${selected ? 'text-accent' : 'text-dim'}`}>
+              {day.dow} {day.dom}
+            </span>
+          </button>
+        );
+      })}
+    </div>
+  );
 }
 
 function DetailModal({ booking, onClose }: { booking: Booking; onClose: () => void }) {
   const [status, setStatus] = useState<BookingStatus>(booking.status);
   const [notes, setNotes] = useState(booking.adminNotes);
   const dirty = status !== booking.status || notes !== booking.adminNotes;
+  const history = useMemo(() => customerHistory(booking), [booking]);
 
-  const row = (label: string, value: string) => (
+  const row = (label: string, value: React.ReactNode) => (
     <div className="flex items-baseline justify-between gap-4 py-0.5">
       <dt className="shrink-0 text-xs font-semibold uppercase tracking-wider text-faint">{label}</dt>
       <dd className="text-right text-sm text-ink">{value || '—'}</dd>
@@ -106,7 +142,12 @@ function DetailModal({ booking, onClose }: { booking: Booking; onClose: () => vo
           </h3>
           <dl>
             {row('Name', `${booking.firstName} ${booking.lastName}`)}
-            {row('Phone', booking.phone)}
+            {row(
+              'Phone',
+              <a href={telHref(booking.phone)} className="font-medium text-accent hover:underline">
+                {booking.phone}
+              </a>,
+            )}
             {row('Email', booking.email)}
           </dl>
         </section>
@@ -117,8 +158,8 @@ function DetailModal({ booking, onClose }: { booking: Booking; onClose: () => vo
           </h3>
           <dl>
             {row('Vehicle', `${booking.vehicleYear} ${booking.vehicleMake} ${booking.vehicleModel}`)}
-            {row('Plate', booking.plate)}
-            {row('Transport', booking.transport)}
+            {row('Plate', booking.plate && <span className="font-mono tracking-widest">{booking.plate}</span>)}
+            {row('Drop-off', transportLabel(booking.transport))}
           </dl>
         </section>
 
@@ -140,17 +181,30 @@ function DetailModal({ booking, onClose }: { booking: Booking; onClose: () => vo
           )}
         </section>
 
+        {history.length > 0 && (
+          <section className="rounded-xl border border-line bg-night-900/70 p-4">
+            <h3 className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-electric">
+              <Icon name="refresh" size={14} /> Visit history · same phone or plate
+            </h3>
+            <ul className="space-y-1.5">
+              {history.slice(0, 5).map((h) => (
+                <li key={h.id} className="flex items-center justify-between gap-3 text-xs">
+                  <span className="text-dim">
+                    {h.date} · {serviceLabel(h)}
+                  </span>
+                  <StatusBadge status={h.status} />
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
         <section className="rounded-xl border border-accent/25 bg-accent/[0.05] p-4">
           <h3 className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-accent">
             <Icon name="gears" size={14} /> Status management
           </h3>
           <label htmlFor="bk-status" className="mb-1.5 block text-xs font-semibold text-dim">Status</label>
-          <select
-            id="bk-status"
-            value={status}
-            onChange={(e) => setStatus(e.target.value as BookingStatus)}
-            className="w-full rounded-xl border border-line bg-night-900 px-4 py-2.5 text-sm text-ink focus:border-accent/60 focus:outline-none"
-          >
+          <select id="bk-status" value={status} onChange={(e) => setStatus(e.target.value as BookingStatus)} className={`${adminInputCls} w-full`}>
             {STATUSES.map((st) => (
               <option key={st} value={st}>{STATUS_META[st].label}</option>
             ))}
@@ -162,7 +216,7 @@ function DetailModal({ booking, onClose }: { booking: Booking; onClose: () => vo
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="Internal notes…"
-            className="w-full resize-none rounded-xl border border-line bg-night-900 px-4 py-2.5 text-sm text-ink placeholder:text-faint focus:border-accent/60 focus:outline-none"
+            className={`${adminInputCls} w-full resize-none`}
           />
         </section>
 
@@ -172,21 +226,27 @@ function DetailModal({ booking, onClose }: { booking: Booking; onClose: () => vo
         </p>
       </div>
 
-      <div className="flex items-center justify-end gap-2.5 border-t border-line px-6 py-4 sm:px-8">
-        <button type="button" className="btn-ghost btn-md" onClick={onClose}>
-          Cancel
+      <div className="flex items-center justify-between gap-2.5 border-t border-line px-6 py-4 sm:px-8">
+        <button type="button" className="btn-ghost btn-sm" onClick={() => printWorkOrder(booking)}>
+          <Icon name="download" size={13} />
+          Print work order
         </button>
-        <button
-          type="button"
-          className={`btn-accent btn-md ${dirty ? '' : 'pointer-events-none opacity-40'}`}
-          onClick={() => {
-            updateBooking(booking.id, { status, adminNotes: notes });
-            onClose();
-          }}
-        >
-          <Icon name="check" size={15} strokeWidth={2.4} />
-          Save changes
-        </button>
+        <div className="flex items-center gap-2.5">
+          <button type="button" className="btn-ghost btn-md" onClick={onClose}>
+            Cancel
+          </button>
+          <button
+            type="button"
+            className={`btn-accent btn-md ${dirty ? '' : 'pointer-events-none opacity-40'}`}
+            onClick={() => {
+              updateBooking(booking.id, { status, adminNotes: notes });
+              onClose();
+            }}
+          >
+            <Icon name="check" size={15} strokeWidth={2.4} />
+            Save changes
+          </button>
+        </div>
       </div>
     </ModalShell>
   );
@@ -194,20 +254,26 @@ function DetailModal({ booking, onClose }: { booking: Booking; onClose: () => vo
 
 export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
   const [tick, setTick] = useState(0);
-  const [tab, setTab] = useState<'bookings' | 'messages'>('bookings');
+  const [tab, setTab] = useState<'today' | 'bookings' | 'messages'>('today');
   const [statusFilter, setStatusFilter] = useState<'all' | BookingStatus>('all');
   const [dateFilter, setDateFilter] = useState('');
   const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<Booking | null>(null);
+  const [walkIn, setWalkIn] = useState(false);
 
   useEffect(() => {
     const onData = () => setTick((t) => t + 1);
-    window.addEventListener('nea:data', onData);
-    return () => window.removeEventListener('nea:data', onData);
+    window.addEventListener('car:data', onData);
+    return () => window.removeEventListener('car:data', onData);
   }, []);
 
   const bookings = useMemo(() => listBookings(), [tick]);
   const messages = useMemo(() => listMessages(), [tick]);
+
+  const advance = (b: Booking) => {
+    const adv = NEXT_STATUS[b.status];
+    if (adv) updateBooking(b.id, { status: adv.next });
+  };
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -230,9 +296,6 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
     { label: 'Total bookings', value: bookings.length, icon: 'gauge' as const },
   ];
 
-  const inputCls =
-    'rounded-xl border border-line bg-night-900 px-3.5 py-2.5 text-sm text-ink placeholder:text-faint focus:border-accent/60 focus:outline-none';
-
   return (
     <div className="min-h-screen bg-night-950 pb-16">
       {/* top bar */}
@@ -252,8 +315,8 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
       </header>
 
       <main className="mx-auto max-w-6xl px-5">
-        <h1 className="mt-10 font-display text-3xl uppercase text-ink sm:text-4xl">Appointments</h1>
-        <p className="mt-1 text-sm text-dim">Review, confirm and manage every booking.</p>
+        <h1 className="mt-10 font-display text-3xl uppercase text-ink sm:text-4xl">Shop Console</h1>
+        <p className="mt-1 text-sm text-dim">Today’s board, every booking, and customer messages — one screen.</p>
 
         {/* stats */}
         <div className="mt-7 grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -272,7 +335,7 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
 
         {/* tabs */}
         <div className="mt-8 flex items-center gap-2 border-b border-line">
-          {(['bookings', 'messages'] as const).map((t) => (
+          {(['today', 'bookings', 'messages'] as const).map((t) => (
             <button
               key={t}
               type="button"
@@ -281,7 +344,7 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
                 tab === t ? 'text-accent' : 'text-dim hover:text-ink'
               }`}
             >
-              {t}
+              {t === 'today' ? 'Today' : t}
               {t === 'messages' && messages.some((m) => !m.read) && (
                 <span className="absolute -right-0.5 top-1.5 h-2 w-2 rounded-full bg-accent" />
               )}
@@ -290,27 +353,37 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
           ))}
         </div>
 
-        {tab === 'bookings' ? (
+        {tab === 'today' && (
+          <ScheduleBoard bookings={bookings} onSelect={setSelected} onAdvance={advance} onWalkIn={() => setWalkIn(true)} />
+        )}
+
+        {tab === 'bookings' && (
           <>
+            <LoadStrip bookings={bookings} active={dateFilter} onPick={setDateFilter} />
+
             {/* filters */}
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as 'all' | BookingStatus)} className={inputCls} aria-label="Filter by status">
+            <div className="mt-5 flex flex-wrap items-center gap-3">
+              <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as 'all' | BookingStatus)} className={adminInputCls} aria-label="Filter by status">
                 <option value="all">All statuses</option>
                 {STATUSES.map((st) => (
                   <option key={st} value={st}>{STATUS_META[st].label}</option>
                 ))}
               </select>
-              <input type="date" value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} className={inputCls} aria-label="Filter by date" />
+              <input type="date" value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} className={adminInputCls} aria-label="Filter by date" />
               <div className="relative min-w-52 flex-1">
                 <Icon name="search" size={15} className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-faint" />
                 <input
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   placeholder="Search customer, phone, ref, plate…"
-                  className={`${inputCls} w-full pl-10`}
+                  className={`${adminInputCls} w-full pl-10`}
                   aria-label="Search bookings"
                 />
               </div>
+              <button type="button" className="btn-ghost btn-sm" onClick={() => setWalkIn(true)}>
+                <Icon name="user" size={13} />
+                Walk-in
+              </button>
               <button type="button" className="btn-ghost btn-sm" onClick={() => exportCSV(filtered)}>
                 <Icon name="download" size={14} />
                 CSV
@@ -319,7 +392,7 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
 
             {/* table */}
             <div className="card mt-5 overflow-x-auto">
-              <table className="w-full min-w-[760px] text-left text-sm">
+              <table className="w-full min-w-[820px] text-left text-sm">
                 <thead>
                   <tr className="border-b border-line text-[0.68rem] uppercase tracking-[0.14em] text-faint">
                     <th className="px-5 py-3.5 font-bold">Ref</th>
@@ -339,30 +412,40 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
                       </td>
                     </tr>
                   )}
-                  {filtered.map((b) => (
-                    <tr key={b.id} className="border-b border-line/60 transition-colors last:border-0 hover:bg-white/[0.025]">
-                      <td className="px-5 py-3.5 font-mono text-xs tracking-wider text-dim">{b.ref}</td>
-                      <td className="px-5 py-3.5">
-                        <p className="font-semibold text-ink">
-                          {b.firstName} {b.lastName}
-                        </p>
-                        <p className="text-xs text-faint">{b.phone}</p>
-                      </td>
-                      <td className="px-5 py-3.5 text-dim">
-                        {b.date} <span className="text-faint">·</span> {slotLabel(b.slot)}
-                      </td>
-                      <td className="px-5 py-3.5 text-dim">
-                        {b.vehicleYear} {b.vehicleMake} {b.vehicleModel}
-                      </td>
-                      <td className="max-w-52 truncate px-5 py-3.5 text-dim">{serviceLabel(b)}</td>
-                      <td className="px-5 py-3.5"><StatusBadge status={b.status} /></td>
-                      <td className="px-5 py-3.5 text-right">
-                        <button type="button" className="btn-ghost btn-sm" onClick={() => setSelected(b)}>
-                          Details
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
+                  {filtered.map((b) => {
+                    const adv = NEXT_STATUS[b.status];
+                    return (
+                      <tr key={b.id} className="border-b border-line/60 transition-colors last:border-0 hover:bg-white/[0.025]">
+                        <td className="px-5 py-3.5 font-mono text-xs tracking-wider text-dim">{b.ref}</td>
+                        <td className="px-5 py-3.5">
+                          <p className="font-semibold text-ink">
+                            {b.firstName} {b.lastName}
+                          </p>
+                          <a href={telHref(b.phone)} className="text-xs text-faint transition hover:text-accent">{b.phone}</a>
+                        </td>
+                        <td className="px-5 py-3.5 text-dim">
+                          {b.date} <span className="text-faint">·</span> {slotLabel(b.slot)}
+                        </td>
+                        <td className="px-5 py-3.5 text-dim">
+                          {b.vehicleYear} {b.vehicleMake} {b.vehicleModel}
+                        </td>
+                        <td className="max-w-52 truncate px-5 py-3.5 text-dim">{serviceLabel(b)}</td>
+                        <td className="px-5 py-3.5"><StatusBadge status={b.status} /></td>
+                        <td className="px-5 py-3.5">
+                          <div className="flex items-center justify-end gap-2">
+                            {adv && (
+                              <button type="button" className="btn-ghost btn-sm" onClick={() => advance(b)} title={`Mark ${adv.next}`}>
+                                {adv.verb}
+                              </button>
+                            )}
+                            <button type="button" className="btn-ghost btn-sm" onClick={() => setSelected(b)}>
+                              Details
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
@@ -374,7 +457,9 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
               </button>
             </p>
           </>
-        ) : (
+        )}
+
+        {tab === 'messages' && (
           <div className="mt-6 space-y-3">
             {messages.length === 0 && (
               <p className="card px-5 py-12 text-center text-sm text-faint">No messages yet — they arrive from the “Visit Us” contact form.</p>
@@ -404,6 +489,7 @@ export function AdminDashboard({ onSignOut }: { onSignOut: () => void }) {
 
       <AnimatePresence>
         {selected && <DetailModal key={selected.id + selected.updatedAt} booking={selected} onClose={() => setSelected(null)} />}
+        {walkIn && <WalkInModal key="walkin" onClose={() => setWalkIn(false)} />}
       </AnimatePresence>
     </div>
   );

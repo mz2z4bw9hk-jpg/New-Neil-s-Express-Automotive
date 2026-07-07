@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { useI18n } from '../../lib/i18n';
+import { slotLabel } from '../../lib/format';
 import { SITE, isOpenNow, todayHours } from '../../lib/site';
 import { useBooking } from '../BookingContext';
 import { HeroArt } from './HeroArt';
@@ -59,7 +60,7 @@ export function Hero() {
           <span className="inline-flex items-center gap-2 rounded-full border border-line bg-night-900/50 px-4 py-2 text-xs font-medium text-dim backdrop-blur-sm">
             <span className={`h-2 w-2 rounded-full ${open ? 'bg-emerald-400' : 'bg-red-400'} ${open ? 'animate-pulse-soft' : ''}`} />
             {open && hours
-              ? d.common.openTodayUntil.replace('{time}', '6:00 PM')
+              ? d.common.openTodayUntil.replace('{time}', slotLabel(hours.close))
               : d.common.closedNow}
           </span>
         </motion.div>
@@ -71,9 +72,9 @@ export function Hero() {
           className="mt-14 grid max-w-lg grid-cols-3 divide-x divide-line border-t border-line pt-6"
         >
           {[
-            { v: SITE.yearsInBusiness, l: d.hero.statYears },
             { v: `${SITE.rating}★`, l: d.hero.statRating },
-            { v: '6', l: d.hero.statDays },
+            { v: `${SITE.reviewCount}+`, l: d.hero.statReviews },
+            { v: '5', l: d.hero.statDays },
           ].map((s, i) => (
             <div key={s.l} className={i === 0 ? 'pr-5' : 'px-5'}>
               <dt className="sr-only">{s.l}</dt>

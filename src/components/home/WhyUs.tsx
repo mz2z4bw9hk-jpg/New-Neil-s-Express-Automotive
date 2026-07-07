@@ -30,14 +30,14 @@ function Counter({ to, decimals = 0, suffix = '' }: { to: number; decimals?: num
   );
 }
 
-export function WhyNeils() {
+export function WhyUs() {
   const { d } = useI18n();
 
   const stats = [
-    { node: <Counter to={50} suffix="+" />, label: d.why.statYears },
     { node: <Counter to={SITE.rating} decimals={1} suffix="★" />, label: d.why.statRating },
     { node: <Counter to={SITE.reviewCount} suffix="+" />, label: d.why.statReviews },
-    { node: <Counter to={6} />, label: d.why.statDays },
+    { node: <Counter to={5} />, label: d.why.statDays },
+    { node: <Counter to={100} suffix="%" />, label: d.why.statOwner },
   ];
 
   return (

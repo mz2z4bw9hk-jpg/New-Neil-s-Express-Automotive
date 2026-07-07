@@ -10,10 +10,10 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       {!compact && (
         <span className="leading-none">
           <span className="block whitespace-nowrap font-display text-[1.05rem] uppercase tracking-wide text-ink">
-            Neil&rsquo;s Express
+            Castro Auto
           </span>
           <span className="mt-1 block whitespace-nowrap text-[0.6rem] font-bold uppercase tracking-[0.3em] text-dim">
-            Automotive · Alhambra
+            Repair · El Monte
           </span>
         </span>
       )}

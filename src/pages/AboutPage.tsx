@@ -3,6 +3,7 @@ import { PageHero } from '../components/PageHero';
 import { Section, Reveal, SectionHeading } from '../components/ui';
 import { Icon, type IconName } from '../components/icons';
 import { useI18n } from '../lib/i18n';
+import { SITE } from '../lib/site';
 import { useBooking } from '../components/BookingContext';
 import { fadeRise, stagger, VIEWPORT } from '../lib/motion';
 
@@ -24,17 +25,17 @@ export default function AboutPage() {
           <Reveal className="lg:sticky lg:top-28">
             <div className="relative overflow-hidden rounded-3xl border border-line bg-night-950 p-8">
               <div aria-hidden="true" className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
-              <p className="font-display text-7xl leading-none text-accent">50+</p>
-              <p className="mt-2 text-sm font-semibold uppercase tracking-wider text-dim">{d.why.statYears}</p>
+              <p className="font-display text-7xl leading-none text-accent">4.9★</p>
+              <p className="mt-2 text-sm font-semibold uppercase tracking-wider text-dim">{d.why.statRating}</p>
               <div className="mt-8 space-y-4 border-t border-line pt-6 text-sm text-dim">
                 <p className="flex items-center gap-3">
-                  <Icon name="pin" size={16} className="shrink-0 text-accent" /> 700 S Garfield Ave, Alhambra
+                  <Icon name="pin" size={16} className="shrink-0 text-accent" /> 9844 Garvey Ave, El Monte
                 </p>
                 <p className="flex items-center gap-3">
-                  <Icon name="shield" size={16} className="shrink-0 text-accent" /> AAA · RepairPal
+                  <Icon name="sparkle" size={16} className="shrink-0 text-accent" /> Porsche · Mercedes-Benz
                 </p>
                 <p className="flex items-center gap-3">
-                  <Icon name="star" size={16} className="shrink-0 text-accent" /> 4.9★
+                  <Icon name="star" size={16} className="shrink-0 text-accent" /> {SITE.reviewCount}+ reviews
                 </p>
               </div>
             </div>
